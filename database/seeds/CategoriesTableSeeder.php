@@ -11,6 +11,9 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
+
+      // DB::table('categories')->ALTER TABLE table_name AUTO_INCREMENT = 1;
+
       DB::table('categories')->insert([
             'name' => "PLANTA",
         ]);
