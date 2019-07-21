@@ -28,7 +28,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
+    protected $redirectTo = '/index';
 
     /**
      * Create a new controller instance.
@@ -47,13 +48,28 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    { $messages = [
+      'required' => 'El :attribute debe estar completo.',
+      'string' => 'El :attribute no debe tener caracteres especiales.STRING',
+      'alpha' => 'El :attribute no debe tener números ni caracteres especiales.ALPHA',
+      'max' => 'El :attribute debe tener :max caracteres como máximo',
+      'min' => 'El :attribute debe tener :min caracteres como mínimo.',
+      'email' => 'El :attribute debe ser un email.',
+      'unique' => 'El :attribute ya se encuentra registrado.',
+      'alpha_dash' => 'El :attribute no debe contener espacios.',
+      'confirmed' => 'Las contraseñas no coinciden',
+      'file' =>  'Error en la carga del archivo. Por favor volver a subir.',
+      'image' => 'El archivo de la imagen solo puede ser jpeg, png o bmp.',
+      'avatar.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.'
+    ];
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-      
+            'username' => ['required', 'alpha_dash', 'string', 'max:255', 'unique:users'],
+            'avatar' => ['file', 'image', 'max:2048'],
+            'password' => ['required', 'string', 'min:5', 'confirmed'],
+        ], $messages);
+
     }
 
     /**
@@ -64,11 +80,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+      // dd($data);
+      // dd($data['avatar']);
+
+      if (isset($data['avatar'])) {
+        $ruta = $data['avatar']->store("public/avatares");
+        $nombreArchivo = basename($ruta);
+      }else {
+        $avatarSinUpload = rand (1,3);
+        $nombreArchivo = $avatarSinUpload.".png";
+      }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'username' => $data['username'],
-            'avatar' => $data['avatar'],
+            'avatar' => $nombreArchivo,
             'password' => Hash::make($data['password']),
         ]);
     }
