@@ -6,6 +6,7 @@ use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Like;
 
 class ArticleController extends Controller
 {
@@ -108,10 +109,12 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
+      $likes = Like::all();
+      // dd($likes);
       $articulo = Article::find($id);
       // dd($articulo);
       $descripcion = explode("\n",$articulo->description);
-        return view("/articulo", compact('articulo', 'descripcion'));
+        return view("/articulo", compact('likes', 'articulo', 'descripcion'));
     }
 
     /**

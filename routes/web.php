@@ -37,6 +37,8 @@ Route::get('/index', 'ArticleController@index');
 
 Route::get('/articulo/{id}', 'ArticleController@show')->middleware('auth');
 
+Route::post('/articulo/{id}', 'LikeController@store')->middleware('auth');
+
 Route::get('/editar_mis_articulos', 'ArticleController@showMyArticles')->middleware('auth');
 
 Route::get('/usuario/{id}', 'ArticleController@showUsersArticles')->middleware('auth');

@@ -50,15 +50,34 @@
     </div>
 
     <div class="items_button2_articulo">
+      @foreach ($likes as $element)
+
       @if (Auth::User()->username == $articulo->usuario->username)
         <button class="button_articulo" type="button">
         <a href="/editar_articulo/{{$articulo->id}}">EDITAR PLANTA</a>
         </button>
-        @else
-        <button class="button_articulo" type="button" name="button">
-        <a href="#">ME INTERESA</a>
-        </button>
+        @break
+
+      @elseif ($element->user_likeador_id == Auth::User()->id && $element->article_id == $articulo->id)
+    <button class="button_articulo" type="button" name="button">
+    <a href="#">EN LA LISTA / PROV</a>
+    </button>
+      @break
+
+    {{-- @elseif ($element->user_likeador_id != Auth::User()->id && $element->article_id != $articulo->id) --}}
+    @elseif($loop->last)
+      {{-- <button class="button_articulo" type="button" name="button">
+      <a href="#">ME INTERESA</a>
+      </button> --}}
+      <form class="" action="/articulo/{{$articulo->id}}" method="post">
+        @csrf
+        <input type="hidden" name="article_id" value="{{$articulo->id}}">
+        <input type="hidden" name="user_likeador_id" value="{{Auth::User()->id}}">
+        <button class="button_articulo" type="submit">ME INTERESA</button>
+      </form>
+
       @endif
+    @endforeach
     </div>
 
   </div>
@@ -108,7 +127,7 @@
   </div>
 
   <div class="items_button1_articulo">
-    @if (Auth::User()->username == $articulo->usuario->username)
+    {{-- @if (Auth::User()->username == $articulo->usuario->username)
       <button class="button_articulo" type="button">
       <a href="/editar_articulo/{{$articulo->id}}">EDITAR PLANTA</a>
       </button>
@@ -116,7 +135,35 @@
       <button class="button_articulo" type="button" name="button">
       <a href="#">ME INTERESA</a>
       </button>
+    @endif --}}
+    @foreach ($likes as $element)
+
+    @if (Auth::User()->username == $articulo->usuario->username)
+      <button class="button_articulo" type="button">
+      <a href="/editar_articulo/{{$articulo->id}}">EDITAR PLANTA</a>
+      </button>
+      @break
+
+    @elseif ($element->user_likeador_id == Auth::User()->id && $element->article_id == $articulo->id)
+  <button class="button_articulo" type="button" name="button">
+  <a href="#">EN LA LISTA / PROV</a>
+  </button>
+    @break
+
+  {{-- @elseif ($element->user_likeador_id != Auth::User()->id && $element->article_id != $articulo->id) --}}
+  @elseif($loop->last)
+    {{-- <button class="button_articulo" type="button" name="button">
+    <a href="#">ME INTERESA</a>
+    </button> --}}
+    <form class="" action="/articulo/{{$articulo->id}}" method="post">
+      @csrf
+      <input type="hidden" name="article_id" value="{{$articulo->id}}">
+      <input type="hidden" name="user_likeador_id" value="{{Auth::User()->id}}">
+      <button class="button_articulo" type="submit">ME INTERESA</button>
+    </form>
+
     @endif
+  @endforeach
   </div>
 
   </div>
