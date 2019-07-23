@@ -9,6 +9,7 @@ use App\Article;
 use App\User;
 use App\Rules\ValidatePassword;
 use Illuminate\Validation\Rule;
+use App\Like;
 
 class UserController extends Controller
 {
@@ -21,17 +22,57 @@ class UserController extends Controller
     {
       $user = Auth::user();
 
+
+      // estos son MIS articulos (para el carrousel del control panel)
       $articulos = Article::all()->filter(function ($articulo) {
       // dd($articulo);
       return $articulo->user_id == Auth::user()->id;
       })->sortBy('updated_at');
-
       // $random = $articulos->random();
       // dd($random);
       $primerSlide = $articulos->pop();
       // dd($primerSlide, $articulos);
 
-      return view("/control_panel", compact('user', 'articulos', 'primerSlide'));
+      // VER TODAS LAS PLANTAS QUE QUIERO:
+      // $likes = Like::all()->filter(function ($like) {
+      // // dd($like);
+      // return $like->user_likeador_id == Auth::user()->id;
+      // });
+      // dd($likes->first()->liker);
+
+      // dd($user->articuloLikeado);
+      // ASI PUEDO VER LAS PLANTAS QUE YO LIKEE!
+      $articulosLikeados = $user->articuloLikeado;
+
+      // VER QUIEN ME LIKEO (y QUE ME LIKEO)
+      // 1er intento
+      // $articulosFull = Article::all()->filter(function ($articulo) {
+      // // dd($articulo);
+      // return $articulo->user_id == Auth::user()->id;
+      // })->sortBy('updated_at');
+
+      // dd($articulosFull);
+      // dd($articulosFull->firstWhere('id', '=', 4)->liker[0]->name);
+      // tengo que hacer un foreach en la vista para acceder a los likers?
+      // $meLikeo = $articulosFull->liker;
+      // dd($meLikeo);
+      // dd($articulosFull->name);
+      // dd($articulosFull->firstWhere('id', '=', 4)->liker[0]->name, $user);
+
+      // VER QUIEN ME LIKEO (y QUE ME LIKEO)
+      // 2do intento
+
+      // $likes = Like::all();
+      // dd($likes->first()->dameElUser->name, $likes->first()->dameElArticulo->name);
+
+      $likes = Like::all()->filter(function ($like) {
+      // dd($like);
+      return $like->dameElArticulo->user_id == Auth::user()->id;
+      })->sortBy('updated_at');
+      // dd($likes->first()->dameElUser->name, $likes->first()->dameElArticulo->name);
+
+
+      return view("/control_panel", compact('user', 'articulos', 'primerSlide', 'articulosLikeados', 'likes'));
     }
 
     /**

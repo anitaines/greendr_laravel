@@ -20,4 +20,8 @@ class Article extends Model
     return $this->belongsTo("App\User", "user_id");
   }
 
+  public function liker(){
+    return $this->belongsToMany("App\User", "likes", "article_id", "user_likeador_id");
+  }
+
 }

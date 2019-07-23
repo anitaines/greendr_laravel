@@ -719,6 +719,13 @@ text-align: center;
   margin-bottom: 30px;
 }
 
+.likeo_cpanel{
+  text-align: center;
+  /* border-bottom: 5px dotted #01635e; */
+  border-bottom: 5px dotted #ffffff;
+  margin-bottom: 30px;
+}
+
 /* .preview_mensajes_items{ */
   /* text-align: center; */
   /* border-bottom: 5px dotted #01635e; */
@@ -747,12 +754,13 @@ text-align: center;
   text-align: center;
   /* border-bottom: 5px dotted #01635e; */
   border-bottom: 5px dotted #ffffff;
+  margin-bottom: 30px;
 }
 
 .misdatos_cpanel{
   text-align: center;
   /* border-bottom: 5px dotted #01635e; */
-  border-bottom: 5px dotted #ffffff;
+  /* border-bottom: 5px dotted #ffffff; */
 }
 
 .perfil_button_cpanel{
@@ -773,8 +781,50 @@ text-align: center;
   background-color: #ff0393;
   margin-top: 30px;
 }
-.hr_controlPanel{
-  border: 5px dotted #ffffff;
+
+.preview_likes_items{
+  background-color: white;
+  border: 3px solid #01635e;
+  width: 100%;
+  height: 264.19px;
+  border-radius: 3%;
+  overflow: scroll;
+}
+.item_likeado_cpanel{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+.img_likeado_cpanel{
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+}
+.uno.item_likeado_cpanel{
+  /* margin-left: 10px; */
+  width: 15%;
+}
+.dos.item_likeado_cpanel{
+  /* margin-left: 10px; */
+  width: 35%;
+}
+.tres.item_likeado_cpanel{
+  /* margin-left: 60px; */
+  width: 15%;
+}
+.cuatro.item_likeado_cpanel{
+  /* margin-left: 10px; */
+  width: 35%;
+}
+hr{
+  width: 95%;
+  border-width: 2px;
+  border-color: #01635e;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 /* FIN CONTROL PANEL MOBILE */
@@ -1664,16 +1714,23 @@ nav{
   margin-left: 10px; */
   width: 48%;
   /* width: 35%; */
-  padding-left: 10px;
-
+  /* padding-left: 10px; */
+border-right: 5px dotted #ffffff;
+padding-right: 10px;
+margin-right: 5px;
 }
-
+.likeo_cpanel{
+  width: 48%;
+  padding-left: 10px;
+}
 .wishlist_cpanel{
   width: 48%;
   /* width: 35%; */
   /* border-right: 5px dotted #ffffff;
   padding-right: 10px; */
   padding-left: 10px;
+  /* padding-right: 10px; */
+  margin-right: 5px;
 }
 
 .misdatos_cpanel{
@@ -1682,9 +1739,10 @@ nav{
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  border-right: 5px dotted #ffffff;
+  /* border-right: 5px dotted #ffffff; */
   padding-right: 10px;
   margin-right: 5px;
+  margin-top: -40px;
 }
 
 .perfil_button_cpanel{
@@ -1697,11 +1755,15 @@ margin-bottom: 15px;
 }
 
 /* new order */
-.subir_plantas_cpanel{
+/* .subir_plantas_cpanel{
   order: 1;
 }
 
 .misplantas_cpanel{
+  order: 1;
+}
+
+.likeo_cpanel{
   order: 1;
 }
 
@@ -1715,7 +1777,7 @@ margin-bottom: 15px;
 
 .misdatos_cpanel{
   order: 1;
-}
+} */
 
 /* FIN CONTROL PANEL TABLET */
 

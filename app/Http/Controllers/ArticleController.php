@@ -111,6 +111,28 @@ class ArticleController extends Controller
     {
       $likes = Like::all();
       // dd($likes);
+
+      // PRUEBA MATCH
+      $likesDeEsteArticulo = Like::where('article_id', '=', $id)
+      ->get();
+      // dd($likesDeEsteArticulo->first()->dameElUser->username);
+
+      $usuariosQueLoLikeron = $likesDeEsteArticulo->pluck('user_likeador_id');
+      // dd($usuariosQueLoLikeron);
+
+      $susArticulos = Article::where('user_id', '=', $usuariosQueLoLikeron)->get();
+      // dd($susArticulos); //esto da una collection de articulos
+      // dd($susArticulos->first()->liker[0]->id); //con liker esto me da un objeto usuario
+
+    //   $match = $susArticulos->filter(function ($articulo) {
+    //   // // dd($articulo);
+    //   return $articulo->liker->id == Auth::user()->id; //NOP
+    // });
+    //   dd($match);
+
+
+      // FIN DE PRUEBA MATCH
+
       $articulo = Article::find($id);
       // dd($articulo);
       $descripcion = explode("\n",$articulo->description);
