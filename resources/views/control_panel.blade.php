@@ -10,6 +10,8 @@
 
     <h3 class="h3_cpanel">PANEL DE CONTROL</h3>
 
+    <div class="top_contenedor">
+
     <div class="subir_plantas_cpanel">
     <a href="formulario_subida">
     <button class="subir button_cpanel" type="button">
@@ -18,6 +20,16 @@
     </a>
     <p class="p_cpanel"><i>  *Planta, esqueje, semillas,<br> producto o servicio de jardinería. </i></p>
     </div>
+    {{-- MIS DATOS --}}
+    <div class="misdatos_cpanel_arriba">
+      <a href="perfil">
+      <button class="perfil_button_cpanel" type="button">
+      MIS DATOS
+      </button>
+      </a>
+      </div>
+
+    </div>
 
     {{-- MIS PLANTAS --}}
     <div class="misplantas_cpanel">
@@ -25,7 +37,7 @@
       <div class="preview_items">
         @if  ($articulos && $primerSlide)
 
-          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <div id="misArticulos" class="carousel slide" data-ride="carousel">
 
             <div class="carousel-inner">
 
@@ -71,11 +83,11 @@
 
       </div>
 
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <a class="carousel-control-prev" href="#misArticulos" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <a class="carousel-control-next" href="#misArticulos" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -136,19 +148,102 @@
 {{-- MENSAJES PROVISORIO --}}
   <div class="mensajes_cpanel">
 
-  <div class="preview_mensajes_items">
+  {{-- <div class="preview_mensajes_items"> --}}
 
-    <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
+    {{-- <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
       <a class="odio onBoarding_a" href="#">
         <img class="photo_mensajes" src="/media/inbox-fake.png" alt="inbox">
       </a>
-    </article>
+    </article> --}}
 
-    </div>
+    {{-- <h5>ESTOS SON TUS MATCHS PENDIENTES</h5>
+    <ul>
+    @foreach ($arrayMatch as $key => $value)
+      <li>{{$value}}</li>
+    @endforeach
+    </ul> --}}
+
+
+    @if (count($matchFinal)>0)
+      <div class="preview_matchs_items">
+
+
+        {{-- "user1" => objeto user, //quien subió
+        "articulo2" => [], array de objetos article //el articulo que quiero
+        "userYo2" => $objeto user, //quién likeó o sea yo que estoy logueada
+        "articuloWished1" => objeto article //el artículo likeado por user1 --}}
+        @for ($i = 0; $i < count($matchFinal); $i++)
+          @foreach ($matchFinal[$i]["articulo2"] as $element)
+          <div class="item_matcheado_cpanel">
+            {{-- user 1 --}}
+            <a class="dosUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["user1"]->id}}"><p>{{$matchFinal[$i]["user1"]->username}}</p></a>
+            <a class="unoUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["user1"]->id}}"><img class="img_matcheado_cpanel" src="/storage/avatares/{{$matchFinal[$i]["user1"]->avatar}}" alt=""></a>
+
+            {{-- intercambio --}}
+
+            <button class="intercambio_button" type="button">
+            <i class="fas fa-exchange-alt"></i>
+            </button>
+
+
+            {{-- user 2 --}}
+            <a class="tresUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><img class="img_matcheado_cpanel" src="/storage/avatares/{{$matchFinal[$i]["userYo2"]->avatar}}" alt=""></a>
+            <a class="cuatroUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><p>{{$matchFinal[$i]["userYo2"]->username}}</p></a>
+          </div>
+
+            <div class="item_matcheado_cpanel">
+            {{-- articulo wished 1 --}}
+            <p class="unoArt item_matcheado_cpanel">TIENE</p>
+            <i class="dosArt fas fa-long-arrow-alt-right"></i>
+            <a class="tresArt item_matcheado_cpanel" href="/articulo/{{$matchFinal[$i]["articuloWished1"]->id}}"><img class="img_matcheado_cpanel" src="/storage/articulos/{{$matchFinal[$i]["articuloWished1"]->image1}}" alt=""></a>
+            <i class="cuatroArt fas fa-long-arrow-alt-left"></i>
+            <p class="cincoArt item_matcheado_cpanel">QUIERE</p>
+            </div>
+
+            {{-- <div class="item_matcheado_cpanel">
+                  <a class="dosUser item_matcheado_cpanel" href="/articulo/{{$matchFinal[$i]["articuloWished1"]->id}}"><p>{{$matchFinal[$i]["articuloWished1"]->name}}</p></a>
+            </div> --}}
+
+            <div class="item_matcheado_cpanel">
+            {{-- articulo 2 --}}
+            <p class="unoArt item_matcheado_cpanel">QUIERE</p>
+            <i class="dosArt fas fa-long-arrow-alt-right"></i>
+            <a class="tresArt item_matcheado_cpanel" href="/articulo/{{$element->id}}"><img class="img_likeado_cpanel" src="/storage/articulos/{{$element->image1}}" alt=""></a>
+            <i class="cuatroArt fas fa-long-arrow-alt-left"></i>
+            <p class="cincoArt item_matcheado_cpanel">TIENE</p>
+            </div>
+
+            {{-- <div class="item_matcheado_cpanel">
+              <a class="dosUser item_matcheado_cpanel" href="/articulo/{{$element->id}}"><p>{{$element->name}}</p></a>
+            </div> --}}
+            <hr>
+            @endforeach
+        @endfor
+
+        </div>
+      @else
+
+      <h5>TODAVIA NO TENÉS NINGÚN MATCH :(</h5>
+
+      @endif
+
+
+
+
+
+
+
+
+    {{-- </div> --}}
+
+
+
+
 
     <a href="#">
     <button class="button_cpanel" type="button">
-        VER TODOS LOS MENSAJES
+        {{-- VER TODOS LOS MENSAJES --}}
+        VER TODOS LOS MATCHS PENDIENTES DE CONFIRMACIÓN
     </button>
         </a>
 
@@ -160,43 +255,34 @@
     <div class="preview_items">
     @if (count($articulosLikeados)>0)
 
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div id="wishlist" class="carousel slide" data-ride="carousel">
 
         <div class="carousel-inner">
 
           <div class="carousel-item active">
-              <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
-                <a class="odio onBoarding_a" href="/editar_wishlist">
-                  <img class="photo onBoarding_photo" src="/media/onboarding/obB.png" alt="planta">
-                  <div class="texto onBoarding_texto">
-                    <h2 class="onBoarding_h2">LAS PLANTAS QUE QUIERO (WISHLIST)</h2>
+              <article id="product_cpanel" class="product_wishlist d-block w-100">
+                <a class="odio" href="/articulo/{{$primerSlideWishlist->id}}">
+
+                  <div class="texto_wishlist">
+                    <h3>{{$primerSlideWishlist->categoria->name}}</h3>
+                    <h2>{{$primerSlideWishlist->name}}</h2>
                   </div>
+                  <img class="photo_wishlist" src="/storage/articulos/{{$primerSlideWishlist->image1}}" alt="planta">
                 </a>
               </article>
           </div>
 
-          {{-- <div class="carousel-item active">
-              <article id="product_cpanel" class="product d-block w-100">
-                <a class="odio onBoarding_a" href="/articulo/{{$primerSlide->id}}">
-                  <img class="photo" src="/storage/articulos/{{$primerSlide->image1}}" alt="planta">
-                  <div class="texto">
-                    <h3>{{$primerSlide->categoria->name}}</h3>
-                    <h2>{{$primerSlide->name}}</h2>
-                  </div>
-                </a>
-              </article>
-          </div> --}}
-
           @foreach ($articulosLikeados as $key => $valueLikeado)
 
           <div class="carousel-item">
-            <article id="product_cpanel" class="product d-block w-100">
+            <article id="product_cpanel" class="product_wishlist d-block w-100">
             <a class="odio" href="/articulo/{{$valueLikeado->id}}">
-            <img class="photo" src="/storage/articulos/{{$valueLikeado->image1}}" alt="planta">
-            <div class="texto">
+
+            <div class="texto_wishlist">
             <h3>{{$valueLikeado->categoria->name}}</h3>
             <h2>{{$valueLikeado->name}}</h2>
             </div>
+            <img class="photo_wishlist" src="/storage/articulos/{{$valueLikeado->image1}}" alt="planta">
             </a>
             </article>
           </div>
@@ -205,11 +291,11 @@
 
         </div>
 
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#wishlist" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#wishlist" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -232,11 +318,11 @@
 
   {{-- MIS DATOS --}}
   <div class="misdatos_cpanel">
-    <a href="perfil">
+    {{-- <a href="perfil">
     <button class="perfil_button_cpanel" type="button">
     MIS DATOS
     </button>
-    </a>
+    </a> --}}
 
     <a href="borrar_cuenta">
     <button class="borrar button_cpanel" type="button">

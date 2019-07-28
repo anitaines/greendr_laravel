@@ -28,51 +28,122 @@ class UserController extends Controller
       // dd($articulo);
       return $articulo->user_id == Auth::user()->id;
       })->sortBy('updated_at');
-      // $random = $articulos->random();
-      // dd($random);
       $primerSlide = $articulos->pop();
       // dd($primerSlide, $articulos);
 
-      // VER TODAS LAS PLANTAS QUE QUIERO:
-      // $likes = Like::all()->filter(function ($like) {
-      // // dd($like);
-      // return $like->user_likeador_id == Auth::user()->id;
-      // });
-      // dd($likes->first()->liker);
-
+      // VER TODAS LAS PLANTAS QUE QUIERO / LAS PLANTAS QUE LIKEE / MI WISHLIST (2do carrousel del control panel):
       // dd($user->articuloLikeado);
-      // ASI PUEDO VER LAS PLANTAS QUE YO LIKEE!
       $articulosLikeados = $user->articuloLikeado;
+      $primerSlideWishlist = $articulosLikeados->pop();
+
 
       // VER QUIEN ME LIKEO (y QUE ME LIKEO)
-      // 1er intento
-      // $articulosFull = Article::all()->filter(function ($articulo) {
-      // // dd($articulo);
-      // return $articulo->user_id == Auth::user()->id;
-      // })->sortBy('updated_at');
-
-      // dd($articulosFull);
-      // dd($articulosFull->firstWhere('id', '=', 4)->liker[0]->name);
-      // tengo que hacer un foreach en la vista para acceder a los likers?
-      // $meLikeo = $articulosFull->liker;
-      // dd($meLikeo);
-      // dd($articulosFull->name);
-      // dd($articulosFull->firstWhere('id', '=', 4)->liker[0]->name, $user);
-
-      // VER QUIEN ME LIKEO (y QUE ME LIKEO)
-      // 2do intento
-
       // $likes = Like::all();
       // dd($likes->first()->dameElUser->name, $likes->first()->dameElArticulo->name);
-
       $likes = Like::all()->filter(function ($like) {
       // dd($like);
       return $like->dameElArticulo->user_id == Auth::user()->id;
       })->sortBy('updated_at');
       // dd($likes->first()->dameElUser->name, $likes->first()->dameElArticulo->name);
+      // dd($likes);
 
 
-      return view("/control_panel", compact('user', 'articulos', 'primerSlide', 'articulosLikeados', 'likes'));
+      //BUSCANDO LOS MATCHS: PLAN F - original plan
+
+      $arrayMatchFullF = [];
+
+      // 1ero: traer Mis likes
+      $misLikes = Like::all()->filter(function ($like) {
+      // dd($like);
+      return $like->dameElArticulo->user_id == Auth::user()->id;
+      })->sortBy('updated_at');
+      // dd($misLikes);
+
+      // 2do: Si usuario que me likeó tiene artículos
+      $articulosLikerArray = [];
+      foreach ($misLikes as $key => $value) {
+        // if ($value->dameElUser->id)
+        $articulosLikerArray[] = Article::where('user_id', '=', $value->user_likeador_id)->get();
+      }
+      // dd($articulosLiker);
+      // dd($articulosLikerArray);
+
+      // 3ero: Si sus artículos tienen like
+      $likersDelLiker = [];
+      foreach ($articulosLikerArray as $key => $value) {
+        foreach ($value as $key => $value2) {
+          $likersDelLiker[] = Like::where('article_id', '=', $value2->id)->get();
+        }
+      }
+      // dd($likersDelLiker);
+
+      // 4to: Si alguno de los likes es mío
+      $miLadoDelMatch = [];
+      foreach ($likersDelLiker as $key => $value) {
+        foreach ($value as $value2) {
+          // dd($value2);
+          if($value2->user_likeador_id == Auth::user()->id){
+            $miLadoDelMatch[] = $value2;
+          }
+        }
+      }
+      // dd($miLadoDelMatch);
+
+
+      // 5to: entonces match (parte A: empezando a completar el array de matchs)
+
+      foreach ($miLadoDelMatch as $key => $value) {
+
+        // $arrayMatchFullF[] = [
+        //   "user1" => $value->dameElArticulo->usuario->username, //quien subió
+        //   "articulo2" => [], //el article que quiero
+        //   "userYo2" => $value->dameElUser->username, //quién likeó o sea yo que estoy logueada
+        //   "articuloWished1" => $value->dameElArticulo->name //el artículo likeado por user1
+        // ];
+        // TRAYENDO OBJETOS EN LUGAR DE NOMBRES:
+        $arrayMatchFullF[] = [
+          "user1" => $value->dameElArticulo->usuario, //quien subió
+          "articulo2" => [], //el article que quiero
+          "userYo2" => $value->dameElUser, //quién likeó o sea yo que estoy logueada
+          "articuloWished1" => $value->dameElArticulo //el artículo likeado por user1
+        ];
+
+      }
+      // dd($arrayMatchFullF);
+
+      // 6to: entonces match (parte B: el array de matchs con articulo matcheado)
+
+      foreach ($misLikes as $key => $value) {
+
+        for ($i=0; $i < count($arrayMatchFullF); $i++) {
+
+        if($value->dameElUser->username == $arrayMatchFullF[$i]["user1"]->username){
+          // $arrayMatchFullF[$i]["articulo2"][] = $value->dameElArticulo->name;
+          // TRAYENDO OBJETOS EN LUGAR DE NOMBRES:
+          $arrayMatchFullF[$i]["articulo2"][] = $value->dameElArticulo;
+        }
+      }
+      }
+      // dd($arrayMatchFullF);
+      // dd($arrayMatchFullF[0]["articulo2"]);
+
+      //7mo: depurando los matchs (si hay likeado más de un artículo del mismo usuario)
+
+      // https://stackoverflow.com/questions/307674/how-to-remove-duplicate-values-from-a-multi-dimensional-array-in-php
+
+      // $arrayDepurado = array_unique($arrayMatchFullF, SORT_REGULAR); //ESTA OPCION IBA BIEN PERO
+
+      // https://www.php.net/manual/en/function.array-unique.php
+      // Note that array_unique() is not intended to work on multi dimensional arrays.
+      // dd($arrayDepurado);
+
+      $matchFinal = array_intersect_key($arrayMatchFullF, array_unique(array_map('serialize', $arrayMatchFullF) ) );
+      // dd($matchFinal);
+      // dd($matchFinal[0]["articulo2"]);
+
+
+      // ojo $articulos incompletos adrede, le falta el primerSlide
+      return view("/control_panel", compact('user', 'articulos', 'primerSlide', 'articulosLikeados', 'primerSlideWishlist','likes', 'matchFinal'));
     }
 
     /**

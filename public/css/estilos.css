@@ -653,19 +653,32 @@ text-align: center;
 .h2_cpanel{
   display: inline-block;
 }
-
+.top_contenedor{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  /* width: 100%; */
+}
 .subir_plantas_cpanel{
   display: flex;
-  align-items: baseline;
+  /* align-items: baseline; */
   justify-content: center;
-  width: 100%;
+  width: 50%;
+}
+.misdatos_cpanel_arriba{
+  text-align: center;
+  /* border-bottom: 5px dotted #01635e; */
+  /* border-bottom: 5px dotted #ffffff; */
 }
 
 .p_cpanel{
   font-family: 'Poppins', sans-serif;
-  margin-top: 30px;
-  margin-bottom: 5px;
+  /* margin-top: 30px;
+  margin-bottom: 5px; */
   display: inline-block;
+  text-align: center;
 }
 
 #product_cpanel{
@@ -675,6 +688,34 @@ text-align: center;
 #product_cpanel:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }
+/* CAROUSEL WISHLIST */
+.product_wishlist {
+  width: 100%;
+  display: flex;
+  border-radius: 3%;
+  margin: 5px;
+  text-align: right;
+}
+.photo_wishlist{
+  width: 50%;
+  height: 100%;
+  /* no se puede setear el height con porcentaje???? */
+}
+/* colores cajas */
+.product_wishlist{
+  background-color: #01635e;
+}
+.product_wishlist .photo_wishlist{
+  border-top-right-radius: 3%;
+  border-bottom-right-radius: 3%;
+}
+.texto_wishlist{
+ text-align: right;
+ margin: 15px;
+ overflow: hidden;
+ width: 50%;
+}
+
 
 .button_cpanel{
   background-color: #f28e22;
@@ -688,7 +729,7 @@ text-align: center;
 }
 
 .subir.button_cpanel{
-  background-color: #f28e22;
+  background-color: #ff0393;
   border-radius: 100px;
   border-width: 0px;
   width: 100px;
@@ -769,8 +810,8 @@ text-align: center;
   border-width: 0px;
   width: 100px;
   height: 100px;
-  margin-top: 10px;
-  /* margin-bottom: 30px; */
+  margin-top: 5px;
+  margin-bottom: 30px;
 }
 
 .perfil_button_cpanel:hover {
@@ -825,6 +866,91 @@ hr{
   border-color: #01635e;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+/* preview matchs */
+.preview_matchs_items{
+  background-color: white;
+  border: 3px solid #01635e;
+  width: 100%;
+  height: 268.19px;
+  border-radius: 3%;
+  overflow: scroll;
+}
+.item_matcheado_cpanel{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+    justify-content: space-around;
+}
+.img_matcheado_cpanel{
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+}
+.unoUser.item_matcheado_cpanel{
+  /* margin-left: 10px; */
+  width: 15%;
+  padding-left: 0px;
+  padding-right: 10px;
+}
+.dosUser.item_matcheado_cpanel{
+  /* margin-left: 10px; */
+  width: 35%;
+  justify-content: flex-end;
+}
+.tresUser.item_matcheado_cpanel{
+  /* margin-left: 60px; */
+  width: 15%;
+}
+.cuatroUser.item_matcheado_cpanel{
+  /* margin-left: 10px; */
+  width: 35%;
+  justify-content: flex-start;
+  padding-left: 0px;
+  padding-right: 10px;
+}
+/* .tresArt.item_matcheado_cpanel{
+  padding-left: 0px;
+}
+.dosBArt.item_matcheado_cpanel{ AHORA ES TRESART
+  padding-left: 0px;
+  padding-right: 20px;
+} */
+
+.unoArt, .dosArt, .tresArt, .cuatroArt, .cincoArt{
+  width: 15%;
+}
+
+.fa-long-arrow-alt-right, .fa-long-arrow-alt-left{
+color: #01635e;
+font-size: 30px;
+margin-bottom: 12px;
+}
+.fa-exchange-alt{
+  color: #01635e;
+  font-size: 30px;
+  /* margin-bottom: 12px; */
+}
+.unoArt, .cincoArt{
+  color: #01635e;
+}
+
+.intercambio_button{
+  background-color: #f28e22;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  border-radius: 100px;
+  border-width: 0px;
+  width: 60px;
+  height: 55px;
+}
+.intercambio_button:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }
 
 /* FIN CONTROL PANEL MOBILE */
@@ -1732,7 +1858,17 @@ margin-right: 5px;
   /* padding-right: 10px; */
   margin-right: 5px;
 }
-
+.misdatos_cpanel_arriba{
+  width: 48%;
+  /* width: 35%; */
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  /* border-right: 5px dotted #ffffff; */
+  /* padding-right: 10px;
+  margin-right: 5px;
+  margin-top: -40px; */
+}
 .misdatos_cpanel{
   width: 48%;
   /* width: 35%; */
@@ -1746,11 +1882,15 @@ margin-right: 5px;
 }
 
 .perfil_button_cpanel{
-margin-top: 25px;
+/* margin-top: 25px; */
 margin-bottom: 15px;
 }
 
 .borrar.button_cpanel{
+  width: 50%;
+}
+
+.subir_plantas_cpanel{
   width: 50%;
 }
 
@@ -1778,6 +1918,21 @@ margin-bottom: 15px;
 .misdatos_cpanel{
   order: 1;
 } */
+/* preview matchs */
+.preview_matchs_items{
+  height: 170.19px;
+}
+.preview_likes_items{
+    height: 166.19px;
+}
+/* CAROUSEL WISHLIST */
+.product_wishlist {
+  width: 47.29%;
+  display: flex;
+  border-radius: 3%;
+  margin: 5px;
+  /* margin: 1.35%; */
+}
 
 /* FIN CONTROL PANEL TABLET */
 
@@ -2336,9 +2491,31 @@ width: 735px;
   width: 1180px;
   top: 150px;
 }
-
-.perfil_button_cpanel{
+.top_contenedor{
+  width: 100%;
+}
+/* .perfil_button_cpanel{
 margin-top: 45px;
+} */
+.subir_plantas_cpanel {
+  align-items: baseline;
+}
+.preview_matchs_items{
+  height: 268.19px;
+}
+.preview_likes_items{
+  height: 264.19px;
+}
+
+/* CAROUSEL WISHLIST */
+.product_wishlist {
+  width: 31.66%;
+  /* width: 29.66%; */
+  /* width: 350px; */
+  /* height: 175px; */
+  display: flex;
+  border-radius: 3%;
+  margin: 5px;
 }
 
 /* FIN CONTROL PANEL DESKTOP */

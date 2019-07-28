@@ -124,7 +124,7 @@
 
     <div class="items_formularioSubida">
          <button class="reset_formularioSubida" type="button">
-  <a href="formulario_subida.php"><p class="crear">RESET</p></a>
+  <a href="/formulario_subida"><p class="crear">RESET</p></a>
          </button>
 
          <!-- Type reset borra los datos cargados pero deja marcados los errores :( -->
