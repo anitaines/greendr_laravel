@@ -9,7 +9,6 @@ class Like extends Model
 {
   public $guarded = [];
 
-<<<<<<< HEAD
   use softDeletes;
 
   public function dameElUser(){
@@ -20,7 +19,4 @@ class Like extends Model
     return $this->belongsTo("App\Article", "article_id");
   }
 
-=======
-  use SoftDeletes;
->>>>>>> fdddbffaedd414871e257d9d1adcc8fbaff6892a
 }
