@@ -3,7 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+<<<<<<< HEAD
 // use Illuminate\Database​\​Eloquent​\​SoftDeletes;
+=======
+>>>>>>> fdddbffaedd414871e257d9d1adcc8fbaff6892a
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model

@@ -9,5 +9,5 @@ class Point extends Model
 {
   public $guarded = [];
 
-  use softDeletes;
+  use SoftDeletes;
 }
