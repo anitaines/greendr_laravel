@@ -47,10 +47,20 @@
   <!-- BUSCADOR -->
 
   <div class="buscador_container">
-<form class="form_nav" action="/index" method="post">
-<input class="input_nav" type="search" name="search" value="">
+
+<form class="form_nav" action="/resultados" method="get">
+  {{-- @csrf --}}
+<input class="input_nav" type="search" name="search" value="" list="articles" autocomplete="off">
+{{-- <datalist id="articles">
+
+  @foreach ($articulos as $element)
+    <option value="{{$element->name}}"></option>
+  @endforeach
+
+</datalist> --}}
 <button class="button_nav" type="submit"><i class="fa fa-search"></i></button>
 </form>
+
   </div>
 
 <!-- ICONOS -->
@@ -141,6 +151,13 @@
 </div>
 
 @yield('content')
+
+<!-- Scripts -->
+<script src="/js/script.js"></script>
+
+{{-- <script src="{{ asset('js/script.js') }}" defer></script> --}}
+
+
 
     {{-- <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">

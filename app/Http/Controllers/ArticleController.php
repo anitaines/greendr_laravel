@@ -252,4 +252,82 @@ class ArticleController extends Controller
 
       return view("/usuario", compact('user', 'articulos'));
     }
+
+    // Route::get('/resultados', 'ArticleController@search'); //con middleware?
+    public function search()
+    {
+      $param = $_GET['search'];
+      $resultados = Article::where('name', 'like', "%$param%")
+      ->orWhere('nomenclature', 'like', "%$param%")
+      ->orderBy('name', 'ASC')
+      // ->get();
+      ->paginate(6);
+      $resultados->withPath("resultados?search=$param");
+
+      return view("/resultados", compact('resultados', 'param'));
+    }
+
+    // Route::get('/resultados?search={search}&', 'ArticleController@searchName');
+
+    // Route::get('/resultados_api/{param}', 'ArticleController@searchname');
+    public function searchname($param)
+    {
+      $resultados = Article::where('name', 'like', "%$param%")
+      ->orderBy('name', 'ASC')
+      ->get();
+      // ->paginate(6);
+      // $resultados->withPath("resultados?search=$param");
+
+      return $resultados;
+    }
+    // Route::get('/resultados_nomenclature_api/{param}', 'ArticleController@searchnomenclature');
+    public function searchnomenclature($param)
+    {
+      $resultados = Article::where('nomenclature', 'like', "%$param%")
+      ->orderBy('nomenclature', 'ASC')
+      ->get();
+      // ->paginate(6);
+      // $resultados->withPath("resultados?search=$param");
+
+      return $resultados;
+    }
+
+
+
+    // Route::get('/resultados?search={search}&', 'ArticleController@searchName');
+    // api/resultados?search={param1}&cat={param2}
+    // public function searchapi($nombre, $categoria, $categoria2)
+    // {
+    //   // $nombre = $_GET['search'];
+    //   // $categoria = $_GET['cat'];
+    //
+    //   $resultados = Article::where('name', 'like', "%$nombre%")
+    //   // ->orWhere('nomenclature', 'like', "%$param%")
+    //   ->where('category_id', '=', $categoria)
+    //   ->where('category_id', '=', $categoria2)
+    //   ->orderBy('name', 'ASC')
+    //   ->get();
+    //   // ->paginate(6);
+    //   // $resultados->withPath("resultados?search=$param");
+    //
+    //   return $resultados;
+    // }
+    // https://api.giphy.com/v1/gifs/search?api_key=UID13E2Yh5re5eTAoJyzWgTtPzUA0SBb&q=cats&limit=25&offset=0&rating=G&lang=en
+
+    public function searchapi()
+    {
+      $nombre = $_GET['search'];
+      $categoria = $_GET['cat'];
+
+      $resultados = Article::where('name', 'like', "%$nombre%")
+      // ->orWhere('nomenclature', 'like', "%$param%")
+      ->where('category_id', '=', $categoria)
+      // ->where('category_id', '=', $categoria2)
+      ->orderBy('name', 'ASC')
+      ->get();
+      // ->paginate(6);
+      // $resultados->withPath("resultados?search=$param");
+
+      return $resultados;
+    }
 }

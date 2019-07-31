@@ -50,3 +50,5 @@ Route::post('/formulario_subida', 'ArticleController@store')->middleware('auth')
 Route::get('/editar_articulo/{id}', 'ArticleController@edit')->middleware('auth');
 
 Route::put('/editar_articulo/{id}', 'ArticleController@update')->middleware('auth');
+
+Route::get('/resultados', 'ArticleController@search'); //con middleware?
