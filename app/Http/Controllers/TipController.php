@@ -82,4 +82,22 @@ class TipController extends Controller
     {
         //
     }
+
+    // Route::get('/que_es_como_funciona', 'TipController@que_es_como_funciona');
+    public function que_es_como_funciona()
+    {
+        return view('/que_es_como_funciona');
+    }
+
+    // Route::get('/que_es_greendr', 'TipController@que_es_greendr');
+    public function que_es_greendr()
+    {
+        return view('/que_es_greendr');
+    }
+
+    // Route::get('/como_funciona', 'TipController@como_funciona');
+    public function como_funciona()
+    {
+        return view('/como_funciona');
+    }
 }

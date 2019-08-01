@@ -33,9 +33,26 @@ class LikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        //Route::post('/articulo/{id}', 'LikeController@store')->middleware('auth');
+        $rules = [
+          ];
+        $messages = [
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+        $like= new Like; //crear instancia de la clase.
+        //Asignar datos al objeto.
+
+        $like->article_id = $request->article_id;
+        $like->user_likeador_id = $request->user_likeador_id;
+
+        //Guardar el objeto en db. Revisar que el modelo tenga $guarded o $fillable
+        $like->save(); //save() también sirve para hacer actualización.
+
+        return redirect("/articulo/$id");
     }
 
     /**

@@ -37,4 +37,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function articuloLikeado(){
+      return $this->belongsToMany("App\Article", "likes", "user_likeador_id", "article_id");
+    }
 }
