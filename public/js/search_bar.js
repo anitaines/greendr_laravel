@@ -8,7 +8,7 @@ window.onload = function(){
 
   input.onkeyup = function(){
   // input.oninput = function(){
-    // if(paramBusqueda.length > 3){
+    if(input.value.length > 2){
 
     fetch("api/resultados_api/" + input.value)
       .then(function(response) {
@@ -20,21 +20,32 @@ window.onload = function(){
 
       var datalist = document.getElementById("articles");
       // console.log(datalist);
-      var option = datalist.querySelector("option");
+// *************
+      for (var i = 0; i < information.length; i++) {
+        datalist.innerHTML = "";
 
-      // datalist.innerHTML = "";
+        var nombre = information[i].name;
 
-      for (var i = 0; i < information.length; i++){
-        nuevoOption = option.cloneNode(true);
-        datalist.append(nuevoOption);
-
-        option.value = information[i].name
-        var img = option.querySelector("img");
-        img.setAttribute("src", "/storage/articulos/" + information[i].image1);
-        var a = option.querySelector("a");
-        a.setAttribute("href", "/articulo/" + information[i].id);
-
+        var option = document.createElement("option");
+        option.value += nombre;
+        datalist.append(option);
       }
+
+
+  // *************
+      // var option = datalist.querySelector("option");
+
+      // for (var i = 0; i < information.length; i++){
+      //   nuevoOption = option.cloneNode(true);
+      //   datalist.append(nuevoOption);
+      //
+      //   option.value = information[i].name
+      //   var img = option.querySelector("img");
+      //   img.setAttribute("src", "/storage/articulos/" + information[i].image1);
+      //   var a = option.querySelector("a");
+      //   a.setAttribute("href", "/articulo/" + information[i].id);
+      //
+      // }
 
       })
       .catch(function(error) {
@@ -42,8 +53,8 @@ window.onload = function(){
       })
 
 
+}
 
-    // }
   };
 
 

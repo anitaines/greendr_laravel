@@ -54,7 +54,7 @@
 <datalist id="articles">
 
   {{-- @foreach ($articulos as $element) --}}
-    <option value=""> <a href=""> <img class="" src="" alt=""> </a> </option>
+    {{-- <option value=""> <a href=""> <img class="" src="" alt=""> </a> </option> --}}
   {{-- @endforeach --}}
 
 </datalist>
