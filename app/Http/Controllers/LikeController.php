@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Like;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
@@ -95,8 +96,19 @@ class LikeController extends Controller
      * @param  \App\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+     // Route::get('/eliminar_like/{id}', 'LikeController@destroy')->middleware('auth');
+     // estoy llegando con el ID de la PLANTA
+    public function destroy($id)
     {
-        //
+
+      $borrarLike = Like::where('article_id', '=', $id)
+      ->where('user_likeador_id', '=', Auth::User()->id)
+      ->get();
+
+      foreach ($borrarLike as $key => $value) {
+        $value->delete();
+      }
+
+      return redirect("/articulo/$id");
     }
 }

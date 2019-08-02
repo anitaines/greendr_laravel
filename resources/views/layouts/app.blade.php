@@ -51,13 +51,13 @@
 <form class="form_nav" action="/resultados" method="get">
   {{-- @csrf --}}
 <input class="input_nav" type="search" name="search" value="" list="articles" autocomplete="off">
-{{-- <datalist id="articles">
+<datalist id="articles">
 
-  @foreach ($articulos as $element)
-    <option value="{{$element->name}}"></option>
-  @endforeach
+  {{-- @foreach ($articulos as $element) --}}
+    <option value=""> <a href=""> <img class="" src="" alt=""> </a> </option>
+  {{-- @endforeach --}}
 
-</datalist> --}}
+</datalist>
 <button class="button_nav" type="submit"><i class="fa fa-search"></i></button>
 </form>
 
@@ -153,7 +153,7 @@
 @yield('content')
 
 <!-- Scripts -->
-<script src="/js/script.js"></script>
+{{-- <script src="{{ asset('js/search_bar.js') }}"></script> --}}
 
 {{-- <script src="{{ asset('js/script.js') }}" defer></script> --}}
 

@@ -54,13 +54,13 @@
 
       @if (Auth::User()->username == $articulo->usuario->username)
         <button class="button_articulo" type="button">
-        <a href="/editar_articulo/{{$articulo->id}}">EDITAR PLANTA</a>
+        <a class="a_button_articulo" href="/editar_articulo/{{$articulo->id}}">EDITAR PLANTA</a>
         </button>
         @break
 
       @elseif ($element->user_likeador_id == Auth::User()->id && $element->article_id == $articulo->id)
     <button class="button_articulo" type="button" name="button">
-    <a href="#">EN LA LISTA / PROV</a>
+    <a class="a_button_articulo" href="/eliminar_like/{{$articulo->id}}" ><i class="fas fa-heart esperando"></i>ESPERANDO MATCH</a>
     </button>
       @break
 
@@ -73,7 +73,7 @@
         @csrf
         <input type="hidden" name="article_id" value="{{$articulo->id}}">
         <input type="hidden" name="user_likeador_id" value="{{Auth::User()->id}}">
-        <button class="button_articulo" type="submit">ME INTERESA</button>
+        <button class="button_articulo" type="submit"><i class="fas fa-heart"></i>QUIERO ESTA PLANTA</button>
       </form>
 
       @endif
@@ -140,14 +140,14 @@
 
     @if (Auth::User()->username == $articulo->usuario->username)
       <button class="button_articulo" type="button">
-      <a href="/editar_articulo/{{$articulo->id}}">EDITAR PLANTA</a>
+      <a class="a_button_articulo" href="/editar_articulo/{{$articulo->id}}">EDITAR PLANTA</a>
       </button>
       @break
 
     @elseif ($element->user_likeador_id == Auth::User()->id && $element->article_id == $articulo->id)
-  <button class="button_articulo" type="button" name="button">
-  <a href="#">EN LA LISTA / PROV</a>
-  </button>
+      <button class="button_articulo" type="button" name="button">
+      <a class="a_button_articulo" href="/eliminar_like/{{$articulo->id}}" ><i class="fas fa-heart esperando"></i>ESPERANDO MATCH</a>
+      </button>
     @break
 
   {{-- @elseif ($element->user_likeador_id != Auth::User()->id && $element->article_id != $articulo->id) --}}
@@ -159,7 +159,7 @@
       @csrf
       <input type="hidden" name="article_id" value="{{$articulo->id}}">
       <input type="hidden" name="user_likeador_id" value="{{Auth::User()->id}}">
-      <button class="button_articulo" type="submit">ME INTERESA</button>
+      <button class="button_articulo" type="submit"><i class="fas fa-heart"></i>QUIERO ESTA PLANTA</button>
     </form>
 
     @endif

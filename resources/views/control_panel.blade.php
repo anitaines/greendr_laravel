@@ -97,7 +97,15 @@
 
     @else
 
-    <h5>NO TENÉS PLANTAS SUBIDAS TODAVIA!</h5>
+    {{-- <h5>NO TENÉS PLANTAS SUBIDAS TODAVIA!</h5> --}}
+    <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
+      <a class="odio onBoarding_a" href="/editar_mis_articulos">
+        <img class="photo onBoarding_photo" src="/media/onboarding/obB.png" alt="planta">
+        <div class="texto onBoarding_texto">
+          <h2 class="onBoarding_h2">NO TENÉS PLANTAS SUBIDAS TODAVIA!</h2>
+        </div>
+      </a>
+    </article>
 
   @endif
   </div>
@@ -133,13 +141,21 @@
     </div>
   @else
 
-  <h5>TODAVIA NO TENÉS NINGÚN LIKE :(</h5>
+  {{-- <h5>TODAVIA NO TENÉS NINGÚN LIKE :(</h5> --}}
+  <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
+    <a class="odio onBoarding_a" href="#">
+      <img class="photo onBoarding_photo" src="/media/onboarding/obA.png" alt="planta">
+      <div class="texto onBoarding_texto">
+        <h2 class="onBoarding_h2">TODAVIA NO TENÉS NINGÚN LIKE</h2>
+      </div>
+    </a>
+  </article>
 
   @endif
 
-    <a href="#">
+    <a href="/mis_likers">
     <button class="button_cpanel" type="button">
-        Quién me likeó?
+        ¿QUIÉN ME LIKEÓ?
     </button>
         </a>
 
@@ -174,22 +190,7 @@
         "articuloWished1" => objeto article //el artículo likeado por user1 --}}
         @for ($i = 0; $i < count($matchFinal); $i++)
           @foreach ($matchFinal[$i]["articulo2"] as $element)
-          <div class="item_matcheado_cpanel">
-            {{-- user 1 --}}
-            <a class="dosUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["user1"]->id}}"><p>{{$matchFinal[$i]["user1"]->username}}</p></a>
-            <a class="unoUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["user1"]->id}}"><img class="img_matcheado_cpanel" src="/storage/avatares/{{$matchFinal[$i]["user1"]->avatar}}" alt=""></a>
 
-            {{-- intercambio --}}
-
-            <button class="intercambio_button" type="button">
-            <i class="fas fa-exchange-alt"></i>
-            </button>
-
-
-            {{-- user 2 --}}
-            <a class="tresUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><img class="img_matcheado_cpanel" src="/storage/avatares/{{$matchFinal[$i]["userYo2"]->avatar}}" alt=""></a>
-            <a class="cuatroUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><p>{{$matchFinal[$i]["userYo2"]->username}}</p></a>
-          </div>
 
             <div class="item_matcheado_cpanel">
             {{-- articulo wished 1 --}}
@@ -200,9 +201,29 @@
             <p class="cincoArt item_matcheado_cpanel">QUIERE</p>
             </div>
 
-            {{-- <div class="item_matcheado_cpanel">
-                  <a class="dosUser item_matcheado_cpanel" href="/articulo/{{$matchFinal[$i]["articuloWished1"]->id}}"><p>{{$matchFinal[$i]["articuloWished1"]->name}}</p></a>
-            </div> --}}
+
+
+            <div class="item_matcheado_cpanel">
+              {{-- user 1 --}}
+              {{-- <div class="user1"> --}}
+              <a class="dosUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["user1"]->id}}"><p>{{$matchFinal[$i]["user1"]->username}}</p></a>
+              <a class="unoUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["user1"]->id}}"><img class="img_matcheado_cpanel" src="/storage/avatares/{{$matchFinal[$i]["user1"]->avatar}}" alt=""></a>
+              {{-- </div> --}}
+              {{-- intercambio --}}
+
+              <button class="intercambio_button" type="button">
+              <i class="fas fa-exchange-alt"></i>
+              </button>
+
+
+              {{-- user 2 --}}
+              {{-- <div class="user2"> --}}
+              <a class="tresUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><img class="img_matcheado_cpanel" src="/storage/avatares/{{$matchFinal[$i]["userYo2"]->avatar}}" alt=""></a>
+              <a class="cuatroUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><p>{{$matchFinal[$i]["userYo2"]->username}}</p></a>
+              {{-- </div> --}}
+            </div>
+
+
 
             <div class="item_matcheado_cpanel">
             {{-- articulo 2 --}}
@@ -213,9 +234,6 @@
             <p class="cincoArt item_matcheado_cpanel">TIENE</p>
             </div>
 
-            {{-- <div class="item_matcheado_cpanel">
-              <a class="dosUser item_matcheado_cpanel" href="/articulo/{{$element->id}}"><p>{{$element->name}}</p></a>
-            </div> --}}
             <hr>
             @endforeach
         @endfor
@@ -223,27 +241,24 @@
         </div>
       @else
 
-      <h5>TODAVIA NO TENÉS NINGÚN MATCH :(</h5>
+      {{-- <h5>TODAVIA NO TENÉS NINGÚN MATCH :(</h5> --}}
+      <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
+        <a class="odio onBoarding_a" href="#">
+          <img class="photo onBoarding_photo" src="/media/onboarding/obA.png" alt="planta">
+          <div class="texto onBoarding_texto">
+            <h2 class="onBoarding_h2">TODAVIA NO TENÉS NINGÚN MATCH</h2>
+          </div>
+        </a>
+      </article>
 
       @endif
 
-
-
-
-
-
-
-
     {{-- </div> --}}
 
-
-
-
-
-    <a href="#">
+    <a href="/matches">
     <button class="button_cpanel" type="button">
         {{-- VER TODOS LOS MENSAJES --}}
-        VER TODOS LOS MATCHS PENDIENTES DE CONFIRMACIÓN
+        MATCHS PENDIENTES DE CONFIRMACIÓN
     </button>
         </a>
 
@@ -251,9 +266,11 @@
 
 {{-- WISHLIST (LAS PLANTAS QUE LIKEE) --}}
   <div class="wishlist_cpanel">
-
+{{-- @dd($articulosLikeados, $primerSlideWishlist) --}}
     <div class="preview_items">
-    @if (count($articulosLikeados)>0)
+    {{-- @if (count($articulosLikeados)>0) --}}
+    {{-- @if ($articulosLikeados && $primerSlideWishlist) --}}
+        @if ($primerSlideQueLikee)
 
       <div id="wishlist" class="carousel slide" data-ride="carousel">
 
@@ -261,28 +278,32 @@
 
           <div class="carousel-item active">
               <article id="product_cpanel" class="product_wishlist d-block w-100">
-                <a class="odio" href="/articulo/{{$primerSlideWishlist->id}}">
+                {{-- <a class="odio" href="/articulo/{{$primerSlideWishlist->id}}"> --}}
+                  <a class="odio" href="/articulo/{{$primerSlideQueLikee->dameElArticulo->id}}">
 
                   <div class="texto_wishlist">
-                    <h3>{{$primerSlideWishlist->categoria->name}}</h3>
-                    <h2>{{$primerSlideWishlist->name}}</h2>
+                    {{-- <h3>{{$primerSlideWishlist->categoria->name}}</h3> --}}
+                      <h3>{{$primerSlideQueLikee->dameElArticulo->categoria->name}}</h3>
+                      {{-- <h2>{{$primerSlideWishlist->name}}</h2> --}}
+                    <h2>{{$primerSlideQueLikee->dameElArticulo->name}}</h2>
                   </div>
-                  <img class="photo_wishlist" src="/storage/articulos/{{$primerSlideWishlist->image1}}" alt="planta">
+                  {{-- <img class="photo_wishlist" src="/storage/articulos/{{$primerSlideWishlist->image1}}" alt="planta"> --}}
+                  <img class="photo_wishlist" src="/storage/articulos/{{$primerSlideQueLikee->dameElArticulo->image1}}" alt="planta">
                 </a>
               </article>
           </div>
 
-          @foreach ($articulosLikeados as $key => $valueLikeado)
+          @foreach ($queLikee as $key => $valueLikeado)
 
           <div class="carousel-item">
             <article id="product_cpanel" class="product_wishlist d-block w-100">
-            <a class="odio" href="/articulo/{{$valueLikeado->id}}">
+            <a class="odio" href="/articulo/{{$valueLikeado->dameElArticulo->id}}">
 
             <div class="texto_wishlist">
-            <h3>{{$valueLikeado->categoria->name}}</h3>
-            <h2>{{$valueLikeado->name}}</h2>
+            <h3>{{$valueLikeado->dameElArticulo->categoria->name}}</h3>
+            <h2>{{$valueLikeado->dameElArticulo->name}}</h2>
             </div>
-            <img class="photo_wishlist" src="/storage/articulos/{{$valueLikeado->image1}}" alt="planta">
+            <img class="photo_wishlist" src="/storage/articulos/{{$valueLikeado->dameElArticulo->image1}}" alt="planta">
             </a>
             </article>
           </div>
@@ -303,12 +324,20 @@
 
       @else
 
-        <h5>TODAVÍA NO LIKEASTE NINGUNA PLANTA!</h5>
+        {{-- <h5>TODAVÍA NO LIKEASTE NINGUNA PLANTA!</h5> --}}
+        <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
+          <a class="odio onBoarding_a" href="/editar_wishlist">
+            <img class="photo onBoarding_photo" src="/media/onboarding/obC.png" alt="planta">
+            <div class="texto onBoarding_texto">
+              <h2 class="onBoarding_h2">TODAVÍA NO LIKEASTE NINGUNA PLANTA</h2>
+            </div>
+          </a>
+        </article>
 
       @endif
       </div>
 
-      <a href="/editar_wishlist">
+      <a href="/wishlist">
       <button class="button_cpanel" type="button">
       VER TODAS LAS PLANTAS QUE QUIERO
       </button>
@@ -317,19 +346,19 @@
   </div>
 
   {{-- MIS DATOS --}}
-  <div class="misdatos_cpanel">
+  {{-- <div class="misdatos_cpanel"> --}}
     {{-- <a href="perfil">
     <button class="perfil_button_cpanel" type="button">
     MIS DATOS
     </button>
     </a> --}}
 
-    <a href="borrar_cuenta">
+    {{-- <a href="borrar_cuenta">
     <button class="borrar button_cpanel" type="button">
     BORRAR CUENTA
     </button>
-    </a>
-  </div>
+    </a> --}}
+  {{-- </div> --}}
 
   </div>
 

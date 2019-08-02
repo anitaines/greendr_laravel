@@ -14,6 +14,8 @@
 
   <h3 class="h3_editarArticulo">{{$articulo->name}}</h3>
 
+  <input type="hidden" class="hidden_id" value="{{$articulo->id}}">
+
 
   <form class="form_editarArticulo" action="/editar_articulo/{{$articulo->id}}" method="post" enctype="multipart/form-data">
     @csrf
@@ -163,11 +165,19 @@
   <div class="items_editarArticulo">
        <button class="enviar_editarArticulo" type="submit"><p class="crear">GUARDAR CAMBIOS</p></button>
   </div>
-
-  <div class="items_editarArticulo">
+</form>
+  <div class="items_editarArticulo botones">
   <button class="descartar_editarArticulo" type="button">
   <a href="/articulo/{{$articulo->id}}"><p class="crear">DESCARTAR CAMBIOS</p></a>
   </button>
+
+  <form class="formB_editarArticulo" action="" method="post">
+
+  <button class="borrar_editarArticulo" type="submit">
+  <a href=""><p class="crear">BORRAR PLANTA</p></a>
+  </button>
+
+  </form>
 
   <!-- botón no funciona... no sé porqué
   <button class="descartar_editarArticulo" type="button" name="button">
@@ -177,9 +187,12 @@
   </div>
 
 
-  </form>
+
 
 
   </div>
+
+  <!-- Script -->
+  <script src="{{ asset('js/editar_articulo.js') }}"></script>
 
 @endsection

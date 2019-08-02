@@ -93,4 +93,6 @@ definir pagination y vh en mobile. reactivar token
 
 </div>
 
+<!-- Script -->
+<script src="{{ asset('js/resultados.js') }}"></script>
 @endsection

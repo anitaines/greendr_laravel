@@ -8,7 +8,7 @@ window.onload = function(){
 
 // <h3 class="h3_resultados">{{$param}}</h3>
 var paramBusqueda = document.querySelector(".h3_resultados").innerText;
-// console.log(paramBusqueda);
+console.log(paramBusqueda);
 
 var checkboxAll = document.getElementById("resultados_all");
 var checkboxName = document.getElementById("resultados_name");

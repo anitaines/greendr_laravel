@@ -153,4 +153,5 @@
 
 		</section>
 
+<script src="{{ asset('js/search_bar.js') }}"></script>
 @endsection

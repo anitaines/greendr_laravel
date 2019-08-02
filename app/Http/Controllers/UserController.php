@@ -33,8 +33,15 @@ class UserController extends Controller
 
       // VER TODAS LAS PLANTAS QUE QUIERO / LAS PLANTAS QUE LIKEE / MI WISHLIST (2do carrousel del control panel):
       // dd($user->articuloLikeado);
-      $articulosLikeados = $user->articuloLikeado;
-      $primerSlideWishlist = $articulosLikeados->pop();
+      // $articulosLikeados = $user->articuloLikeado; //TRAE TAMBIEN LOS ARTICULOS QUE DESLIKEE :(
+      // // dd($articulosLikeados);
+      // $primerSlideWishlist = $articulosLikeados->pop();
+
+      $queLikee = Like::where('user_likeador_id', '=', Auth::User()->id)
+      ->get();
+      // dd($queLikee);
+      $primerSlideQueLikee = $queLikee->pop();
+
 
 
       // VER QUIEN ME LIKEO (y QUE ME LIKEO)
@@ -143,7 +150,7 @@ class UserController extends Controller
 
 
       // ojo $articulos incompletos adrede, le falta el primerSlide
-      return view("/control_panel", compact('user', 'articulos', 'primerSlide', 'articulosLikeados', 'primerSlideWishlist','likes', 'matchFinal'));
+      return view("/control_panel", compact('user', 'articulos', 'primerSlide', 'primerSlideQueLikee', 'queLikee', 'likes', 'matchFinal'));
     }
 
     /**
@@ -267,5 +274,93 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    // Route::get('/mis_likers', 'UserController@misLikers')->middleware('auth');
+    public function misLikers()
+    {
+      // VER QUIEN ME LIKEO (y QUE ME LIKEO)
+      $likes = Like::all()->filter(function ($like) {
+      return $like->dameElArticulo->user_id == Auth::user()->id;
+      })->sortBy('updated_at');
+
+      return view("/misLikers", compact('likes'));
+    }
+
+    // Route::get('/matches', 'UserController@matches')->middleware('auth');
+    public function matches()
+    {
+      $arrayMatchFullF = [];
+
+      // 1ero: traer Mis likes
+      $misLikes = Like::all()->filter(function ($like) {
+      return $like->dameElArticulo->user_id == Auth::user()->id;
+      })->sortBy('updated_at');
+
+      // 2do: Si usuario que me likeó tiene artículos
+      $articulosLikerArray = [];
+      foreach ($misLikes as $key => $value) {
+        $articulosLikerArray[] = Article::where('user_id', '=', $value->user_likeador_id)->get();
+      }
+
+      // 3ero: Si sus artículos tienen like
+      $likersDelLiker = [];
+      foreach ($articulosLikerArray as $key => $value) {
+        foreach ($value as $key => $value2) {
+          $likersDelLiker[] = Like::where('article_id', '=', $value2->id)->get();
+        }
+      }
+
+      // 4to: Si alguno de los likes es mío
+      $miLadoDelMatch = [];
+      foreach ($likersDelLiker as $key => $value) {
+        foreach ($value as $value2) {
+          // dd($value2);
+          if($value2->user_likeador_id == Auth::user()->id){
+            $miLadoDelMatch[] = $value2;
+          }
+        }
+      }
+
+      // 5to: entonces match (parte A: empezando a completar el array de matchs)
+
+      foreach ($miLadoDelMatch as $key => $value) {
+
+        // $arrayMatchFullF[] = [
+        //   "user1" => $value->dameElArticulo->usuario->username, //quien subió
+        //   "articulo2" => [], //el article que quiero
+        //   "userYo2" => $value->dameElUser->username, //quién likeó o sea yo que estoy logueada
+        //   "articuloWished1" => $value->dameElArticulo->name //el artículo likeado por user1
+        // ];
+        // TRAYENDO OBJETOS EN LUGAR DE NOMBRES:
+        $arrayMatchFullF[] = [
+          "user1" => $value->dameElArticulo->usuario, //quien subió
+          "articulo2" => [], //el article que quiero
+          "userYo2" => $value->dameElUser, //quién likeó o sea yo que estoy logueada
+          "articuloWished1" => $value->dameElArticulo //el artículo likeado por user1
+        ];
+
+      }
+
+      // 6to: entonces match (parte B: el array de matchs con articulo matcheado)
+
+      foreach ($misLikes as $key => $value) {
+
+        for ($i=0; $i < count($arrayMatchFullF); $i++) {
+
+        if($value->dameElUser->username == $arrayMatchFullF[$i]["user1"]->username){
+          // $arrayMatchFullF[$i]["articulo2"][] = $value->dameElArticulo->name;
+          // TRAYENDO OBJETOS EN LUGAR DE NOMBRES:
+          $arrayMatchFullF[$i]["articulo2"][] = $value->dameElArticulo;
+        }
+      }
+      }
+
+
+      //7mo: depurando los matchs (si hay likeado más de un artículo del mismo usuario)
+      $matchFinal = array_intersect_key($arrayMatchFullF, array_unique(array_map('serialize', $arrayMatchFullF) ) );
+
+
+      // ojo $articulos incompletos adrede, le falta el primerSlide
+      return view("/matches", compact('matchFinal'));
     }
 }

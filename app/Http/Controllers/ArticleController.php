@@ -217,9 +217,20 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+
+        $borrarArticulo = Article::find($id);
+        $borrarArticulo->delete();
+
+        $borrarLikes = Like::where('article_id', '=', $id)
+        ->get();
+
+        foreach ($borrarLikes as $key => $value) {
+          $value->delete();
+        }
+
+        return redirect("/editar_mis_articulos");
     }
 
     public function showMyArticles()
@@ -231,6 +242,13 @@ class ArticleController extends Controller
       })->sortBy('updated_at');
       // dd($articulos);
       return view("/editar_mis_articulos", compact('user', 'articulos'));
+    }
+    // Route::get('/whilist', 'ArticleController@showMywishlist')->middleware('auth');
+    public function showMywishlist()
+    {
+      $queLikee = Like::where('user_likeador_id', '=', Auth::User()->id)
+      ->get();
+      return view("/wishlist", compact('queLikee'));
     }
 
     // Route::get('/usuario/{id}', 'ArticleController@showUsersArticles')->middleware('auth');
@@ -317,11 +335,12 @@ class ArticleController extends Controller
     public function searchapi()
     {
       $nombre = $_GET['search'];
-      $categoria = $_GET['cat'];
+      $nomenclature = $_GET['nomenclature'];
+      $categoria1 = $_GET['cat1'];
 
       $resultados = Article::where('name', 'like', "%$nombre%")
       // ->orWhere('nomenclature', 'like', "%$param%")
-      ->where('category_id', '=', $categoria)
+      ->where('category_id', '=', $categoria1)
       // ->where('category_id', '=', $categoria2)
       ->orderBy('name', 'ASC')
       ->get();
