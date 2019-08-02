@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+      $this->call(CategoriesTableSeeder::class);
+      
       //INSERTAR USERS
       DB::table('users')->insert([
           'name' => "Sarai",
@@ -190,6 +192,6 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UsersTableSeeder::class);
 
-        $this->call(CategoriesTableSeeder::class);
+
     }
 }
