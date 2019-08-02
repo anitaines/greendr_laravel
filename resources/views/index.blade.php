@@ -77,9 +77,9 @@
   <!-- on boarding tablet -->
   <article class="product onBoarding tablet">
   <a class="odio onBoarding_a" href="/que_es_como_funciona">
-    <img class="photo onBoarding_photo" src="/media/onboarding/obA.png" alt="obA">
+    {{-- <img class="photo onBoarding_photo" src="/media/onboarding/obA.png" alt="obA"> --}}
     <div class="texto onBoarding_texto">
-      <h2 class="onBoarding_h2">QUÉ ES GREENDR</h2>
+      <h2 class="onBoarding_h2">QUÉ ES GREENDR Y</h2>
       <br>
       <h2 class="onBoarding_h2">CÓMO INTERCAMBIAR PLANTAS</h2>
     </div>
@@ -88,7 +88,7 @@
 
   <article class="product onBoarding tablet">
   <a class="odio onBoarding_a" href="{{ route('register') }}">
-    <img class="photo onBoarding_photo" src="/media/onboarding/obC.png" alt="obC">
+    {{-- <img class="photo onBoarding_photo" src="/media/onboarding/obC.png" alt="obC"> --}}
     <div class="texto onBoarding_texto">
       <h2 class="onBoarding_h2">REGISTRATE ACA</h2>
     </div>
@@ -99,7 +99,7 @@
   <!-- on boarding desktop   -->
       <article class="product onBoarding desktop">
         <a class="odio onBoarding_a" href="/que_es_greendr">
-          <img class="photo onBoarding_photo" src="/media/onboarding/obA.png" alt="obA">
+          {{-- <img class="photo onBoarding_photo" src="/media/onboarding/obA.png" alt="obA"> --}}
           <div class="texto onBoarding_texto">
             <h2 class="onBoarding_h2">QUÉ ES GREENDR</h2>
           </div>
@@ -108,7 +108,7 @@
 
       <article class="product onBoarding desktop">
         <a class="odio onBoarding_a" href="/como_funciona">
-          <img class="photo onBoarding_photo" src="/media/onboarding/obB.png" alt="obB">
+          {{-- <img class="photo onBoarding_photo" src="/media/onboarding/obB.png" alt="obB"> --}}
           <div class="texto onBoarding_texto">
             <h2 class="onBoarding_h2">CÓMO INTERCAMBIAR PLANTAS</h2>
           </div>
@@ -117,7 +117,7 @@
 
       <article class="product onBoarding desktop">
         <a class="odio onBoarding_a" href="{{ route('register') }}">
-          <img class="photo onBoarding_photo" src="/media/onboarding/obC.png" alt="obC">
+          {{-- <img class="photo onBoarding_photo" src="/media/onboarding/obC.png" alt="obC"> --}}
           <div class="texto onBoarding_texto">
             <h2 class="onBoarding_h2">REGISTRATE ACÁ</h2>
           </div>
@@ -153,5 +153,5 @@
 
 		</section>
 
-<script src="{{ asset('js/search_bar.js') }}"></script>
+{{-- <script src="{{ asset('js/search_bar.js') }}"></script> --}}
 @endsection

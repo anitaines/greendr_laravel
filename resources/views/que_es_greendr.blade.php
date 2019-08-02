@@ -11,10 +11,10 @@
   <h3 class="h3_boarding">QUÉ ES GREENDR</h3>
 
   <div class="texto_boarding">
-    <p class="p_boarding"> Greendr es un sitio para intercambiar plantas.</p>
-    <p class="p_boarding">Funciona como un club de jardinería pero virtual donde vas a poder intercambiar tus plantas por las plantas que te gusten de otros usuarios</p>
-    <p class="p_boarding">Además de plantas, vas a poder intercambiar esquejes, semillas, productos de jardinería - nuevos o usados - e incluso servicios.</p>
-    <p class="p_boarding">Sumá especies a tu jardín, gratis.</p>
+    <p class="p_boarding"> Greendr es una red social para amantes de las plantas.</p>
+    <p class="p_boarding">Es un club de jardinería virtual donde podés intercambiar semillas, esquejes, almácigos, herramientas de jardinería e incluso servicios. </p>
+    <p class="p_boarding">Subí los productos que quieras intercambiar y conseguí las plantas que estás buscando.</p>
+    <p class="p_boarding">Enriquecé tu jardín y el de las otras personas, ¡es gratis!</p>
 
   </div>
 

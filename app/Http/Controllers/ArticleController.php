@@ -83,7 +83,16 @@ class ArticleController extends Controller
         $nombreArchivo3 = null;
       }
 
-      $articulo->name = strtoupper($request->name);
+      $sinAcentoA = str_replace("á", "a", $request->name);
+      $sinAcentoE = str_replace("é", "e", $sinAcentoA);
+      $sinAcentoI = str_replace("í", "i", $sinAcentoE);
+      $sinAcentoO = str_replace("ó", "o", $sinAcentoI);
+      $sinAcentoU = str_replace("ú", "u", $sinAcentoO);
+      $sinDieresis = str_replace("ü", "u", $sinAcentoU);
+
+      $articulo->name = strtoupper($sinDieresis);
+
+      // $articulo->name = strtoupper($request->name);
       $articulo->nomenclature = $request->nomenclature;
       $articulo->category_id = $request->category_id;
       $articulo->description = $request->description;

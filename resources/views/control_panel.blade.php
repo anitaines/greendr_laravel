@@ -143,7 +143,7 @@
 
   {{-- <h5>TODAVIA NO TENÉS NINGÚN LIKE :(</h5> --}}
   <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
-    <a class="odio onBoarding_a" href="#">
+    <a class="odio onBoarding_a" href="/mis_likers">
       <img class="photo onBoarding_photo" src="/media/onboarding/obA.png" alt="planta">
       <div class="texto onBoarding_texto">
         <h2 class="onBoarding_h2">TODAVIA NO TENÉS NINGÚN LIKE</h2>
@@ -243,7 +243,7 @@
 
       {{-- <h5>TODAVIA NO TENÉS NINGÚN MATCH :(</h5> --}}
       <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
-        <a class="odio onBoarding_a" href="#">
+        <a class="odio onBoarding_a" href="/matches">
           <img class="photo onBoarding_photo" src="/media/onboarding/obA.png" alt="planta">
           <div class="texto onBoarding_texto">
             <h2 class="onBoarding_h2">TODAVIA NO TENÉS NINGÚN MATCH</h2>
@@ -326,7 +326,7 @@
 
         {{-- <h5>TODAVÍA NO LIKEASTE NINGUNA PLANTA!</h5> --}}
         <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
-          <a class="odio onBoarding_a" href="/editar_wishlist">
+          <a class="odio onBoarding_a" href="/wishlist">
             <img class="photo onBoarding_photo" src="/media/onboarding/obC.png" alt="planta">
             <div class="texto onBoarding_texto">
               <h2 class="onBoarding_h2">TODAVÍA NO LIKEASTE NINGUNA PLANTA</h2>

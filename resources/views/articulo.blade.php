@@ -50,6 +50,8 @@
     </div>
 
     <div class="items_button2_articulo">
+      {{-- @dd($likes) --}}
+      {{-- ESTA LOGICA NO FUNCIONA SI NO HAY LIKES EN LA BASE DE DATOS :( --}}
       @foreach ($likes as $element)
 
       @if (Auth::User()->username == $articulo->usuario->username)

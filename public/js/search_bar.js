@@ -8,7 +8,8 @@ window.onload = function(){
 
   input.onkeyup = function(){
   // input.oninput = function(){
-    if(input.value.length > 2){
+  document.getElementById("articles").innerHTML = "";
+    // if(input.value.length > 2){
 
     fetch("api/resultados_api/" + input.value)
       .then(function(response) {
@@ -20,32 +21,46 @@ window.onload = function(){
 
       var datalist = document.getElementById("articles");
       // console.log(datalist);
-// *************
-      for (var i = 0; i < information.length; i++) {
-        datalist.innerHTML = "";
 
-        var nombre = information[i].name;
-
-        var option = document.createElement("option");
-        option.value += nombre;
-        datalist.append(option);
-      }
-
-
-  // *************
-      // var option = datalist.querySelector("option");
-
-      // for (var i = 0; i < information.length; i++){
-      //   nuevoOption = option.cloneNode(true);
-      //   datalist.append(nuevoOption);
+// ************* con datalist
+      // for (var i = 0; i < information.length; i++) {
+      //   datalist.innerHTML = "";
       //
-      //   option.value = information[i].name
-      //   var img = option.querySelector("img");
-      //   img.setAttribute("src", "/storage/articulos/" + information[i].image1);
-      //   var a = option.querySelector("a");
-      //   a.setAttribute("href", "/articulo/" + information[i].id);
+      //   var nombre = information[i].name;
       //
+      //   var option = document.createElement("option");
+      //   option.value += nombre;
+      //   datalist.append(option);
       // }
+
+  // ************* con div
+
+  for (var i = 0; i < information.length; i++) {
+    // datalist.innerHTML = "";
+
+    var href = "/articulo/" + information[i].id;
+    var src = "/storage/articulos/" + information[i].image1
+    var nombre = information[i].name;
+
+    var layout = `
+      <a href='${href}' class= 'a_busqueda'>
+        <img class= 'img_busqueda' style="height:30px; width:auto" src='${src}' alt=''>${nombre}
+      </a>
+      `;
+
+    datalist.innerHTML += (layout);
+
+    // var a = document.createElement("a");
+    // a.href += href;
+    // datalist.append(a);
+    //
+    // var img = document.createElement("img");
+    // img.src += src;
+    // a.innerHTML += img;
+    //
+    // a.innerText += nombre;
+
+  }
 
       })
       .catch(function(error) {
@@ -53,7 +68,7 @@ window.onload = function(){
       })
 
 
-}
+// } cierre if con length
 
   };
 

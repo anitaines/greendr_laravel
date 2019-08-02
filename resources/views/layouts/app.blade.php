@@ -51,15 +51,37 @@
 <form class="form_nav" action="/resultados" method="get">
   {{-- @csrf --}}
 <input class="input_nav" type="search" name="search" value="" list="articles" autocomplete="off">
-<datalist id="articles">
-
+{{-- <datalist id="articles"> --}}
   {{-- @foreach ($articulos as $element) --}}
     {{-- <option value=""> <a href=""> <img class="" src="" alt=""> </a> </option> --}}
   {{-- @endforeach --}}
+{{-- </datalist> --}}
 
-</datalist>
+
+
+
+{{-- <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div> --}}
+
+
+
+
+
+
+
+
 <button class="button_nav" type="submit"><i class="fa fa-search"></i></button>
 </form>
+
+<div class="" id="articles">
+
+</div>
 
   </div>
 
@@ -68,11 +90,22 @@
 
     <div class="iconos-container">
 
-      <a class="iconos" href="/index"><i class="fas fa-home"></i></a>
+      {{-- <a class="iconos" href="/index"><i class="fas fa-home"></i></a> --}}
 
       <div class="chip">
+        <a href="{{ route('register') }}">
+          REGISTRO
+        </a>
+        </div>
+
+
+        <div class="chip chiplog">
+          <img src="/media/logos/cosita_green.png" alt="" width="22px">
+        </div>
+
+        <div class="chip chiplog">
         <a href="{{ route('login') }}">
-          <i class="fas fa-user"></i>
+          {{-- <i class="fas fa-user"></i> --}}
           LOGIN
         </a>
       </div>
@@ -100,7 +133,7 @@
 
     <div class="iconos-container">
 
-      <a class="iconos" href="/index"><i class="fas fa-home"></i></a>
+      {{-- <a class="iconos" href="/index"><i class="fas fa-home"></i></a> --}}
 
       <div class="chip">
         <a href="/control_panel">
@@ -153,7 +186,7 @@
 @yield('content')
 
 <!-- Scripts -->
-{{-- <script src="{{ asset('js/search_bar.js') }}"></script> --}}
+<script src="{{ asset('js/search_bar.js') }}"></script>
 
 {{-- <script src="{{ asset('js/script.js') }}" defer></script> --}}
 
