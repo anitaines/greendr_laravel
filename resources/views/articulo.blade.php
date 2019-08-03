@@ -106,10 +106,10 @@
     @endforeach
   </div>
 
-  <div class="items_articulo">
+  {{-- <div class="items_articulo">
     <h4 class="h4_articulo">Punto de intercambio:</h4>
     <p class="p_articulo">{{$articulo->point_id}}</p>
-  </div>
+  </div> --}}
 
   <div class="items_articulo">
       <h4 class="h4_articulo">Usuario:</h4>

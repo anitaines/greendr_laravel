@@ -152,15 +152,15 @@
       </div>
       </div>
 
-        <p>PENDIENTE: PREVIEW IMAGE</p>
+        {{-- <p>PENDIENTE: PREVIEW IMAGE</p> --}}
 
     </div>
 
-  <div class="items_editarArticulo">
+  {{-- <div class="items_editarArticulo">
 
       <p>PENDIENTE: SETEAR UBICACION</p>
 
-  </div>
+  </div> --}}
 
   <div class="items_editarArticulo">
        <button class="enviar_editarArticulo" type="submit"><p class="crear">GUARDAR CAMBIOS</p></button>
@@ -179,16 +179,7 @@
 
   </form>
 
-  <!-- botón no funciona... no sé porqué
-  <button class="descartar_editarArticulo" type="button" name="button">
-  <a href="editar_mis_articulos.php">DESCARTAR CAMBIOS</a>
-  </button> -->
-
   </div>
-
-
-
-
 
   </div>
 

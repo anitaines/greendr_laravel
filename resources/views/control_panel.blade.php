@@ -41,17 +41,6 @@
 
             <div class="carousel-inner">
 
-        {{-- <div class="carousel-item active">
-            <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
-              <a class="odio onBoarding_a" href="/editar_mis_articulos">
-                <img class="photo onBoarding_photo" src="/media/onboarding/obB.png" alt="planta">
-                <div class="texto onBoarding_texto">
-                  <h2 class="onBoarding_h2">MIS PLANTAS</h2>
-                </div>
-              </a>
-            </article>
-        </div> --}}
-
         <div class="carousel-item active">
             <article id="product_cpanel" class="product d-block w-100">
               <a class="odio onBoarding_a" href="/articulo/{{$primerSlide->id}}">
@@ -164,25 +153,8 @@
 {{-- MENSAJES PROVISORIO --}}
   <div class="mensajes_cpanel">
 
-  {{-- <div class="preview_mensajes_items"> --}}
-
-    {{-- <article id="product_cpanel" class="product onBoarding mobile d-block w-100">
-      <a class="odio onBoarding_a" href="#">
-        <img class="photo_mensajes" src="/media/inbox-fake.png" alt="inbox">
-      </a>
-    </article> --}}
-
-    {{-- <h5>ESTOS SON TUS MATCHS PENDIENTES</h5>
-    <ul>
-    @foreach ($arrayMatch as $key => $value)
-      <li>{{$value}}</li>
-    @endforeach
-    </ul> --}}
-
-
     @if (count($matchFinal)>0)
       <div class="preview_matchs_items">
-
 
         {{-- "user1" => objeto user, //quien subió
         "articulo2" => [], array de objetos article //el articulo que quiero
@@ -201,8 +173,6 @@
             <p class="cincoArt item_matcheado_cpanel">QUIERE</p>
             </div>
 
-
-
             <div class="item_matcheado_cpanel">
               {{-- user 1 --}}
               {{-- <div class="user1"> --}}
@@ -215,15 +185,12 @@
               <i class="fas fa-exchange-alt"></i>
               </button>
 
-
               {{-- user 2 --}}
               {{-- <div class="user2"> --}}
               <a class="tresUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><img class="img_matcheado_cpanel" src="/storage/avatares/{{$matchFinal[$i]["userYo2"]->avatar}}" alt=""></a>
               <a class="cuatroUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><p>{{$matchFinal[$i]["userYo2"]->username}}</p></a>
               {{-- </div> --}}
             </div>
-
-
 
             <div class="item_matcheado_cpanel">
             {{-- articulo 2 --}}
@@ -253,8 +220,6 @@
 
       @endif
 
-    {{-- </div> --}}
-
     <a href="/matches">
     <button class="button_cpanel" type="button">
         {{-- VER TODOS LOS MENSAJES --}}
@@ -278,16 +243,11 @@
 
           <div class="carousel-item active">
               <article id="product_cpanel" class="product_wishlist d-block w-100">
-                {{-- <a class="odio" href="/articulo/{{$primerSlideWishlist->id}}"> --}}
                   <a class="odio" href="/articulo/{{$primerSlideQueLikee->dameElArticulo->id}}">
-
                   <div class="texto_wishlist">
-                    {{-- <h3>{{$primerSlideWishlist->categoria->name}}</h3> --}}
                       <h3>{{$primerSlideQueLikee->dameElArticulo->categoria->name}}</h3>
-                      {{-- <h2>{{$primerSlideWishlist->name}}</h2> --}}
                     <h2>{{$primerSlideQueLikee->dameElArticulo->name}}</h2>
                   </div>
-                  {{-- <img class="photo_wishlist" src="/storage/articulos/{{$primerSlideWishlist->image1}}" alt="planta"> --}}
                   <img class="photo_wishlist" src="/storage/articulos/{{$primerSlideQueLikee->dameElArticulo->image1}}" alt="planta">
                 </a>
               </article>
@@ -344,21 +304,6 @@
       </a>
 
   </div>
-
-  {{-- MIS DATOS --}}
-  {{-- <div class="misdatos_cpanel"> --}}
-    {{-- <a href="perfil">
-    <button class="perfil_button_cpanel" type="button">
-    MIS DATOS
-    </button>
-    </a> --}}
-
-    {{-- <a href="borrar_cuenta">
-    <button class="borrar button_cpanel" type="button">
-    BORRAR CUENTA
-    </button>
-    </a> --}}
-  {{-- </div> --}}
 
   </div>
 

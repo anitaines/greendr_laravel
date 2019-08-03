@@ -44,14 +44,12 @@ class LikeController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $like= new Like; //crear instancia de la clase.
-        //Asignar datos al objeto.
+        $like= new Like;
 
         $like->article_id = $request->article_id;
         $like->user_likeador_id = $request->user_likeador_id;
 
-        //Guardar el objeto en db. Revisar que el modelo tenga $guarded o $fillable
-        $like->save(); //save() también sirve para hacer actualización.
+        $like->save();
 
         return redirect("/articulo/$id");
     }

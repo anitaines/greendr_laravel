@@ -105,18 +105,15 @@
 
           <p class="error_formularioSubida"> @error('image3') {{ $message }} @enderror </p>
 
-          <p>PENDIENTE: PREVIEW IMAGE</p>
+          {{-- <p>PENDIENTE: PREVIEW IMAGE</p> --}}
 
     </div>
 
-    <div class="items_formularioSubida">
+    {{-- <div class="items_formularioSubida">
 
         <p>PENDIENTE: SETEAR UBICACION</p>
 
-    </div>
-
-
-  <!-- <input type="checkbox" name="recordarme" value="si"> Recordarme<br> -->
+    </div> --}}
 
     <div class="items_formularioSubida">
          <button class="enviar_formularioSubida" type="submit"><p class="crear">SUBIR PLANTA</p></button>

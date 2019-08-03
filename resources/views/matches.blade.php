@@ -32,10 +32,6 @@
         <p class="cincoArt item_matcheado_cpanel">QUIERE</p>
         </div>
 
-
-
-
-
         <div class="item_matcheado_cpanel">
           {{-- user 1 --}}
           <a class="dosUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["user1"]->id}}"><p>{{$matchFinal[$i]["user1"]->username}}</p></a>
@@ -52,8 +48,6 @@
           <a class="tresUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><img class="img_matcheado_cpanel" src="/storage/avatares/{{$matchFinal[$i]["userYo2"]->avatar}}" alt=""></a>
           <a class="cuatroUser item_matcheado_cpanel" href="/usuario/{{$matchFinal[$i]["userYo2"]->id}}"><p>{{$matchFinal[$i]["userYo2"]->username}}</p></a>
         </div>
-
-
 
 
         <div class="item_matcheado_cpanel">

@@ -60,13 +60,14 @@ class RegisterController extends Controller
       'confirmed' => 'Las contraseñas no coinciden',
       'file' =>  'Error en la carga del archivo. Por favor volver a subir.',
       'image' => 'El archivo de la imagen solo puede ser jpeg, png o bmp.',
-      'avatar.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.'
+      'avatar.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.',
+      'dimensions' => 'La imagen debe ser cuadrada.'
     ];
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'username' => ['required', 'alpha_dash', 'string', 'max:255', 'unique:users'],
-            'avatar' => ['file', 'image', 'max:2048'],
+            'avatar' => ['file', 'image', 'max:2048', 'dimensions:ratio=1/1'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
         ], $messages);
 

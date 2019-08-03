@@ -11,15 +11,13 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
-
 Route::get('/', 'ArticleController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', 'ArticleController@index');
 
 Route::get('/que_es_como_funciona', 'TipController@que_es_como_funciona');
 

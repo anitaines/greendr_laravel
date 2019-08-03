@@ -46,9 +46,9 @@ class ArticleController extends Controller
         'nomenclature' => ['required', 'string', 'max:255'],
         'category_id' => ['required', 'integer'],
         'description' => ['required', 'string', 'max:255'],
-        'image1' => ['required','file', 'image', 'max:2048'],
-        'image2' => ['nullable', 'file', 'image', 'max:2048'],
-        'image3' => ['nullable', 'file', 'image', 'max:2048'],
+        'image1' => ['required','file', 'image', 'max:2048', 'dimensions:ratio=1/1'],
+        'image2' => ['nullable', 'file', 'image', 'max:2048', 'dimensions:ratio=1/1'],
+        'image3' => ['nullable', 'file', 'image', 'max:2048', 'dimensions:ratio=1/1'],
         ];
       $messages = [
         'required' => 'El campo :attribute debe estar completo.',
@@ -59,12 +59,12 @@ class ArticleController extends Controller
         'image1.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.',
         'image2.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.',
         'image3.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.',
+        'dimensions' => 'La imagen debe ser cuadrada.'
       ];
 
       $this->validate($request, $rules, $messages);
 
-      $articulo= new Article; //crear instancia de la clase.
-      //Asignar datos al objeto.
+      $articulo= new Article;
 
       $ruta1 = $request->image1->store("public/articulos");
       $nombreArchivo1 = basename($ruta1);
@@ -101,9 +101,7 @@ class ArticleController extends Controller
       $articulo->image3 = $nombreArchivo3;
       $articulo->user_id = Auth::user()->id;
 
-
-      //Guardar el objeto en db. Revisar que el modelo tenga $guarded o $fillable
-      $articulo->save(); //save() también sirve para hacer actualización.
+      $articulo->save();
 
       return redirect('/editar_mis_articulos');
 
@@ -156,9 +154,9 @@ class ArticleController extends Controller
         'nomenclature' => ['required', 'string', 'max:255'],
         'category_id' => ['required', 'integer'],
         'description' => ['required', 'string', 'max:255'],
-        'image1' => ['file', 'image', 'max:2048'],
-        'image2' => ['nullable', 'file', 'image', 'max:2048'],
-        'image3' => ['nullable', 'file', 'image', 'max:2048'],
+        'image1' => ['file', 'image', 'max:2048', 'dimensions:ratio=1/1'],
+        'image2' => ['nullable', 'file', 'image', 'max:2048', 'dimensions:ratio=1/1'],
+        'image3' => ['nullable', 'file', 'image', 'max:2048', 'dimensions:ratio=1/1'],
         ];
       $messages = [
         'required' => 'El campo :attribute debe estar completo.',
@@ -169,6 +167,7 @@ class ArticleController extends Controller
         'image1.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.',
         'image2.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.',
         'image3.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.',
+        'dimensions' => 'La imagen debe ser cuadrada.'
       ];
 
       $this->validate($request, $rules, $messages);
@@ -202,7 +201,15 @@ class ArticleController extends Controller
         $nombreArchivo3 = $articulo->image3;
       }
 
-      $articulo->name = strtoupper($request->name);
+      $sinAcentoA = str_replace("á", "a", $request->name);
+      $sinAcentoE = str_replace("é", "e", $sinAcentoA);
+      $sinAcentoI = str_replace("í", "i", $sinAcentoE);
+      $sinAcentoO = str_replace("ó", "o", $sinAcentoI);
+      $sinAcentoU = str_replace("ú", "u", $sinAcentoO);
+      $sinDieresis = str_replace("ü", "u", $sinAcentoU);
+
+      $articulo->name = strtoupper($sinDieresis);
+      // $articulo->name = strtoupper($request->name);
       $articulo->nomenclature = $request->nomenclature;
       $articulo->category_id = $request->category_id;
       $articulo->description = $request->description;
@@ -252,6 +259,7 @@ class ArticleController extends Controller
       // dd($articulos);
       return view("/editar_mis_articulos", compact('user', 'articulos'));
     }
+
     // Route::get('/whilist', 'ArticleController@showMywishlist')->middleware('auth');
     public function showMywishlist()
     {
@@ -266,11 +274,6 @@ class ArticleController extends Controller
       $user = User::find($id);
       // dd($id, $user);
 
-      // $articulos = Article::all()->filter(function ($articulo) {
-      //   // dd($articulo);
-      // return $articulo->user_id == $id;
-      // })->sortBy('updated_at');
-
       $articulos = Article::where('user_id', '=', $id)
       ->orderBy('updated_at')
       ->get();
@@ -280,6 +283,7 @@ class ArticleController extends Controller
       return view("/usuario", compact('user', 'articulos'));
     }
 
+    //BARRA DE BUSQUEDA resultados
     // Route::get('/resultados', 'ArticleController@search'); //con middleware?
     public function search()
     {
@@ -296,10 +300,12 @@ class ArticleController extends Controller
 
     // Route::get('/resultados?search={search}&', 'ArticleController@searchName');
 
+    //BARRA DE BUSQUEDA preview
     // Route::get('/resultados_api/{param}', 'ArticleController@searchname');
     public function searchname($param)
     {
-      $resultados = Article::where('name', 'like', "%$param%")
+      $resultados = Article::where('name', 'like', "$param%")
+      ->orWhere('nomenclature', 'like', "$param%")
       ->orderBy('name', 'ASC')
       ->get();
       // ->paginate(6);

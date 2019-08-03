@@ -22,7 +22,6 @@ class UserController extends Controller
     {
       $user = Auth::user();
 
-
       // estos son MIS articulos (para el carrousel del control panel)
       $articulos = Article::all()->filter(function ($articulo) {
       // dd($articulo);
@@ -216,7 +215,7 @@ class UserController extends Controller
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
         // 'username' => ['required', 'alpha_dash', 'string', 'max:255', 'unique:users'],
-        'avatar' => ['file', 'image', 'max:2048'],
+        'avatar' => ['file', 'image', 'max:2048', 'dimensions:ratio=1/1'],
         'password' => ['nullable','string', 'min:5', 'confirmed'],
         'oldPassword' => ['required', new ValidatePassword],
       ];
@@ -233,7 +232,8 @@ class UserController extends Controller
         'confirmed' => 'Las contraseñas no coinciden',
         'file' =>  'Error en la carga del archivo. Por favor volver a subir.',
         'image' => 'El archivo de la imagen solo puede ser jpeg, png o bmp.',
-        'avatar.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.'
+        'avatar.max' => 'El archivo de la imagen es demasiado grande, no debe superar 2MB.',
+        'dimensions' => 'La imagen debe ser cuadrada.'
       ];
 
       $this->validate($request, $rules, $messages);
@@ -259,8 +259,7 @@ class UserController extends Controller
 
       // @@dd($user);
 
-      //Guardar el objeto en db. Revisar que el modelo tenga $guarded o $fillable
-      $user->save(); //save() también sirve para hacer actualización.
+      $user->save();
 
       return redirect("/control_panel");
     }
@@ -275,6 +274,7 @@ class UserController extends Controller
     {
         //
     }
+
     // Route::get('/mis_likers', 'UserController@misLikers')->middleware('auth');
     public function misLikers()
     {
