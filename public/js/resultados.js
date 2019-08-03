@@ -1,4 +1,4 @@
-window.onload = function(){
+// window.onload = function(){
 
 // FILTRANDO RESULTADOS BUSQUEDA
 
@@ -192,4 +192,4 @@ fetch("api/resultados_nomenclature_api/" + param)
   .catch(function(error) {
   console.log("Error: " + error);
   })
-}
+// }

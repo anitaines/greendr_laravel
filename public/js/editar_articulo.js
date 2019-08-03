@@ -1,4 +1,4 @@
-window.onload = function(){
+// window.onload = function(){
 
   var borrarArticulo = document.querySelector(".formB_editarArticulo");
   // console.log(borrarArticulo);
@@ -18,4 +18,4 @@ window.onload = function(){
 }
 
 
-}
+// }
