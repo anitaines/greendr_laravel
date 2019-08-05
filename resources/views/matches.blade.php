@@ -8,7 +8,7 @@
 
   <div class="contenedor_editarMisArticulos">
 
-  <h3 class="h3_editarMisArticulos">QUIÉN LIKEÓ MIS PLANTAS*:</h3>
+  <h3 class="h3_editarMisArticulos">MIS MATCHES PENDIENTES:</h3>
 
   <div class="div_likers">
 
@@ -17,6 +17,7 @@
     "userYo2" => $objeto user, //quién likeó o sea yo que estoy logueada
     "articuloWished1" => objeto article //el artículo likeado por user1 --}}
     @for ($i = 0; $i < count($matchFinal); $i++)
+
       @foreach ($matchFinal[$i]["articulo2"] as $element)
 
         <div class="item_matcheado_cpanel">
@@ -67,7 +68,9 @@
           <a class="dosUser item_matcheado_cpanel" href="/articulo/{{$element->id}}"><p>{{$element->name}}</p></a>
         </div> --}}
         <hr>
+
         @endforeach
+
     @endfor
 
     </div>

@@ -473,7 +473,7 @@ margin-bottom: 1rem;
 .error_registro{
   font-size: 1rem;
   font-style: italic;
-  color: #ffffff;
+  color: red;
   text-shadow: 1px 1px darkgrey;
 }
 
@@ -579,7 +579,7 @@ align-items: center;
 .error_login{
   font-size: 1rem;
   font-style: italic;
-  color: #ffffff;
+  color: red;
   text-align: center;
 }
 
@@ -1004,7 +1004,7 @@ margin-left: 5px;
 .error_formularioSubida{
   font-size: 1rem;
   font-style: italic;
-  color: #ffffff;
+  color: red;
 }
 
 .p_formularioSubida{
@@ -1250,7 +1250,7 @@ margin-left: 5px;
 .error__editarArticulo{
   font-size: 1rem;
   font-style: italic;
-  color: #ffffff;
+  color: red;
 }
 
 .p_editarArticulo{
@@ -1375,7 +1375,7 @@ align-items: center;
 .error_perfil{
   font-size: 1rem;
   font-style: italic;
-  color: #ffffff;
+  color: red;
 }
 
 .p_perfil{
@@ -1511,7 +1511,7 @@ display: none;
   background-color: #EBDFBC;
   border-radius: 3px;
   width: 470px;
-  height: 75vh;
+  /* height: 75vh; */
   margin: auto;
   padding-top: 10px;
   padding-bottom: 30px;

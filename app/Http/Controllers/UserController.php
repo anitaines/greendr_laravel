@@ -142,8 +142,13 @@ class UserController extends Controller
       // https://www.php.net/manual/en/function.array-unique.php
       // Note that array_unique() is not intended to work on multi dimensional arrays.
       // dd($arrayDepurado);
+      // dd($arrayMatchFullF);
 
       $matchFinal = array_intersect_key($arrayMatchFullF, array_unique(array_map('serialize', $arrayMatchFullF) ) );
+
+      //8vo: reindexando el array numericamente
+      $matchFinal = array_values($matchFinal);
+      
       // dd($matchFinal);
       // dd($matchFinal[0]["articulo2"]);
 
@@ -359,8 +364,11 @@ class UserController extends Controller
       //7mo: depurando los matchs (si hay likeado más de un artículo del mismo usuario)
       $matchFinal = array_intersect_key($arrayMatchFullF, array_unique(array_map('serialize', $arrayMatchFullF) ) );
 
+      //8vo: reindexando el array numericamente
+      $matchFinal = array_values($matchFinal);
 
-      // ojo $articulos incompletos adrede, le falta el primerSlide
+      // dd($arrayMatchFullF, $matchFinal);
+
       return view("/matches", compact('matchFinal'));
     }
 }

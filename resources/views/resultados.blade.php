@@ -90,7 +90,7 @@
 @endforeach
 
 {{-- {{ $resultados->links() }} --}}
-{{-- definir pagination y vh en mobile. reactivar token? --}}
+{{-- definir pagination y vh en mobile. reactivar token? no hace falta, venimos por get --}}
 @endif
 </div>
 
