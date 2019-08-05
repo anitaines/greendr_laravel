@@ -24,9 +24,11 @@
 
   <div class="label_categorias_resultados">
 
-  <label for="">Filtrar los resultados por categoría:</label>
+  {{-- <label for="">Filtrar los resultados por categoría:</label> --}}
 
   <div class="categorias_resultados">
+    <label for="categorias_all">Buscar en todas las categorías:</label>
+    <input type="checkbox" id="categorias_all" name="category_all" value="categorias" checked>
     <label for="planta">Planta</label>
     <input type="checkbox" id="planta" name="category_id" value="1">
     <label for="esqueje">Esqueje</label>
@@ -64,6 +66,10 @@
 
 
 <div class="resultados_resultados">
+{{-- @dd($resultados) --}}
+  @if(count($resultados)<1)
+    <h4>No hay resultados para tu búsqueda.</h4>
+  @else
 
 @foreach ($resultados as $resultado)
 
@@ -83,8 +89,9 @@
 
 @endforeach
 
-{{ $resultados->links() }}
-definir pagination y vh en mobile. reactivar token
+{{-- {{ $resultados->links() }} --}}
+{{-- definir pagination y vh en mobile. reactivar token? --}}
+@endif
 </div>
 
 

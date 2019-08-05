@@ -103,6 +103,23 @@ class ArticleController extends Controller
 
       $articulo->save();
 
+      // LIKE FANTASMA
+      // HECHO SOLAMENTE PARA DARLE DINAMISMO A LA PRESENTACION DEL PROYECTO
+      if(Auth::user()->id != 1 && Auth::user()->id !=2 && Auth::user()->id !=3){
+      $like= new Like;
+
+      $esteArticulo = Article::all()->last();
+      $esteArticuloId = $esteArticulo->id;
+
+      $liker = rand(1,3);
+
+      $like->article_id = $esteArticuloId;
+      $like->user_likeador_id = $liker;
+
+      $like->save();
+      }
+      // FIN LIKE FANTASMA
+
       return redirect('/editar_mis_articulos');
 
       // dd($request, $articulo);
@@ -291,16 +308,17 @@ class ArticleController extends Controller
       $resultados = Article::where('name', 'like', "%$param%")
       ->orWhere('nomenclature', 'like', "%$param%")
       ->orderBy('name', 'ASC')
-      // ->get();
-      ->paginate(6);
-      $resultados->withPath("resultados?search=$param");
+      ->get();
+      // ->paginate(6);
+      // $resultados->withPath("resultados?search=$param");
 
       return view("/resultados", compact('resultados', 'param'));
     }
 
-    // Route::get('/resultados?search={search}&', 'ArticleController@searchName');
+
 
     //BARRA DE BUSQUEDA preview
+    // http://localhost:8000/api/resultados_api/d
     // Route::get('/resultados_api/{param}', 'ArticleController@searchname');
     public function searchname($param)
     {
@@ -326,37 +344,53 @@ class ArticleController extends Controller
     }
 
 
+    // FILTROS DEL BUSCADOR
 
-    // Route::get('/resultados?search={search}&', 'ArticleController@searchName');
-    // api/resultados?search={param1}&cat={param2}
-    // public function searchapi($nombre, $categoria, $categoria2)
-    // {
-    //   // $nombre = $_GET['search'];
-    //   // $categoria = $_GET['cat'];
-    //
-    //   $resultados = Article::where('name', 'like', "%$nombre%")
-    //   // ->orWhere('nomenclature', 'like', "%$param%")
-    //   ->where('category_id', '=', $categoria)
-    //   ->where('category_id', '=', $categoria2)
-    //   ->orderBy('name', 'ASC')
-    //   ->get();
-    //   // ->paginate(6);
-    //   // $resultados->withPath("resultados?search=$param");
-    //
-    //   return $resultados;
-    // }
-    // https://api.giphy.com/v1/gifs/search?api_key=UID13E2Yh5re5eTAoJyzWgTtPzUA0SBb&q=cats&limit=25&offset=0&rating=G&lang=en
+    // fetch("api/resultados?name=" + nombre + "&nomenclature=" + nCientifico + "&planta=" + cat1 +  "&esqueje=" + cat2 + "&semillas=" + cat3 + "&producto=" + cat4 + "&servicio=" + cat5)
+
+    // localhost:8000/api/resultados?name=p&nomenclature=p&planta=1&esqueje=2&semillas=false&producto=false&servicio=false
 
     public function searchapi()
     {
-      $nombre = $_GET['search'];
-      $nomenclature = $_GET['nomenclature'];
-      $categoria1 = $_GET['cat1'];
+      // dd($_GET);
+      $name = $_GET['name']; //si no quiere buscar en name poner false en el query
+      $nomenclature = $_GET['nomenclature']; //si no quiere buscar en nomenclature poner false en el query
+      $planta = $_GET['planta']; //si no quiere buscar en planta poner false en el query, SINO planta=1
+      $esqueje = $_GET['esqueje'];
+      $semillas = $_GET['semillas'];
+      $producto = $_GET['producto'];
+      $servicio = $_GET['servicio'];
 
-      $resultados = Article::where('name', 'like', "%$nombre%")
-      // ->orWhere('nomenclature', 'like', "%$param%")
-      ->where('category_id', '=', $categoria1)
-      // ->where('category_id', '=', $categoria2)
+      $resultados = Article::where(function ($query) {
+          $query->where('name', 'like', '%' . $_GET['name'] . '%')
+                ->orWhere('nomenclature', 'like', '%' . $_GET['nomenclature'] . '%');
+      })
+      ->where(function ($query) {
+          $query->where('category_id', '=', $_GET['planta'])
+                ->orWhere('category_id', '=', $_GET['esqueje'])
+                ->orWhere('category_id', '=', $_GET['semillas'])
+                ->orWhere('category_id', '=', $_GET['producto'])
+                ->orWhere('category_id', '=', $_GET['servicio']);
+      })
+
+      ->orderBy('name', 'ASC')
+      ->get();
+      // ->paginate(6);
+      // $resultados->withPath("resultados?search=$param");
+
+      return $resultados;
+    }
+
+    // FILTRO BUSCADOR USUARIO
+    // Route::get('/resultados_user', 'ArticleController@searchuser');
+    // http://localhost:8000/api/resultados_user?user=fani
+
+    public function searchuser()
+    {
+      // dd($_GET);
+      $user = $_GET['user']; //si no quiere buscar en name poner false en el query
+
+      $resultados = User::where('username', 'like', '%' . $_GET['user'] . '%')
       ->orderBy('name', 'ASC')
       ->get();
       // ->paginate(6);

@@ -17,15 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('/resultados?search={search}&', 'ArticleController@searchName');
-
+;
+// BARRA DE BUSQUEDA
 Route::get('/resultados_api/{param}', 'ArticleController@searchname');
 
-Route::get('/resultados_nomenclature_api/{param}', 'ArticleController@searchnomenclature');
-
-// Route::get('/resultados?search={param1}&cat={param2}', 'ArticleController@searchapi');
-// api/resultados?search={param1}&cat={param2}
-
-// Route::get('/resultados/{nombre}/{categoria}/{categoria2}', 'ArticleController@searchapi');
+// FILTROS BUSCADOR
 Route::get('/resultados', 'ArticleController@searchapi');
-// api/resultados?search={param1}&cat={param2}
+
+// FILTRO BUSCADOR USUARIO
+Route::get('/resultados_user', 'ArticleController@searchuser');
